@@ -1,0 +1,21 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+
+ENTITY PC IS
+	PORT(
+			clock, reset : IN STD_LOGIC;
+			pc_input	 : IN STD_LOGIC (31 DOWNTO 0);		
+			pc_output : OUT STD_LOGIC (31 DOWNTO 0);
+		  );
+END PC;
+
+ARCHITECTURE behavior OF PC IS
+BEGIN
+
+PROCESS (clock, reset)
+BEGIN
+	if (reset = '0') THEN
+		
+END PROCESS;
+
+END behavior;

@@ -1,0 +1,49 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name TOP_LEVEL_ENTITY mips_processor
+
+set_global_assignment -name LAST_QUARTUS_VERSION 15.1.0
+set_global_assignment -name DEVICE 5CGXFC7C7F23C8
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VECTOR_WAVEFORM_FILE register_file.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_SUB.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_SRLV.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_SRL.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_SLT.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_SLLV.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_SLL.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_OR.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_NOR.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_LUI.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_AND.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE ALU_ADD.vwf
+set_global_assignment -name MIF_FILE ROM.mif
+set_global_assignment -name SOURCE_FILE ROMVHDL.cmp
+set_global_assignment -name SOURCE_FILE RAM.cmp
+set_global_assignment -name QIP_FILE ROMVHDL.qip
+set_global_assignment -name QIP_FILE RAM.qip
+set_global_assignment -name VHDL_FILE signextend.vhd
+set_global_assignment -name VHDL_FILE ROMVHDL.vhd
+set_global_assignment -name VHDL_FILE register_file.vhd
+set_global_assignment -name VHDL_FILE RAM.vhd
+set_global_assignment -name VHDL_FILE pc.vhd
+set_global_assignment -name VHDL_FILE orgate.vhd
+set_global_assignment -name VHDL_FILE mux.vhd
+set_global_assignment -name VHDL_FILE mips_processor.vhd
+set_global_assignment -name VHDL_FILE mips_control.vhd
+set_global_assignment -name VHDL_FILE max32.vhd
+set_global_assignment -name VHDL_FILE Lab.vhd
+set_global_assignment -name VHDL_FILE and.vhd
+set_global_assignment -name VHDL_FILE alu.vhd
+set_global_assignment -name VECTOR_WAVEFORM_FILE mips_control_v2.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform_test_sign_extend.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE mips_control_testV2.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE PC_test.vwf
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (VHDL)"
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
