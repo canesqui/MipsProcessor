@@ -164,8 +164,8 @@ PROCESS (slow_clock)
 BEGIN
 	IF RISING_EDGE(slow_clock) THEN
 		IF (reset_stages = '1') THEN
-			sinstruction_IFID <= "0";
-			spc_IFID <= "0";
+			sinstruction_IFID <= X"00000000";
+			spc_IFID <= X"00000000";
 		ELSE
 			sinstruction_IFID <= instruction;
 			spc_IFID <= pc_counter_input; --mapped
@@ -176,75 +176,132 @@ END PROCESS;
 --id/ex
 PROCESS (slow_clock)
 BEGIN
-	spc_IDEX <= spc_IFID;	
-	--MIPS_CONTROL
-	sregwrite_IDEX <= regwrite_signal;
-	sregdest_IDEX <= regdest;
-	salusrc_IDEX <= alu_src;
-	salucontrol_IDEX <= alu_control;
-	smemtoreg_IDEX <= mem_to_reg;
-	sjal_IDEX <= jal_control;
-	smemread_IDEX <= mem_read;
-	smemwrite_IDEX <= mem_write;
-	sjump_IDEX <= jump_control;
-	sbeq_IDEX <= beq_control;
-	sbne_IDEX <= bne_control;
-	sjr_IDEX <= jr_control;
-	--register_file
-	sreaddata1_IDEX <= read_data1_reg;
-	sreaddata2_IDEX <= read_data2_reg;
-	--signextend
-	ssignextend_IDEX <= alu_mux_input1;	
-	sjumpaddress_IDEX <= jump_address;
+
+	IF RISING_EDGE(slow_clock) THEN
+		IF (reset_stages = '1') THEN
+			spc_IDEX <= x"00000000";	
+			--MIPS_CONTROL
+			sregwrite_IDEX <= '0';
+			sregdest_IDEX <= '0';
+			salusrc_IDEX <= '0';
+			salucontrol_IDEX <= "0000";
+			smemtoreg_IDEX <= '0';
+			sjal_IDEX <= '0';
+			smemread_IDEX <= '0';
+			smemwrite_IDEX <= '0';
+			sjump_IDEX <= '0';
+			sbeq_IDEX <= '0';
+			sbne_IDEX <= '0';
+			sjr_IDEX <= '0';
+			--register_file
+			sreaddata1_IDEX <= X"00000000";
+			sreaddata2_IDEX <= X"00000000";
+			--signextend
+			ssignextend_IDEX <= X"00000000";	
+			sjumpaddress_IDEX <= X"00000000";
+		ELSE
+			spc_IDEX <= spc_IFID;	
+			--MIPS_CONTROL
+			sregwrite_IDEX <= regwrite_signal;
+			sregdest_IDEX <= regdest;
+			salusrc_IDEX <= alu_src;
+			salucontrol_IDEX <= alu_control;
+			smemtoreg_IDEX <= mem_to_reg;
+			sjal_IDEX <= jal_control;
+			smemread_IDEX <= mem_read;
+			smemwrite_IDEX <= mem_write;
+			sjump_IDEX <= jump_control;
+			sbeq_IDEX <= beq_control;
+			sbne_IDEX <= bne_control;
+			sjr_IDEX <= jr_control;
+			--register_file
+			sreaddata1_IDEX <= read_data1_reg;
+			sreaddata2_IDEX <= read_data2_reg;
+			--signextend
+			ssignextend_IDEX <= alu_mux_input1;	
+			sjumpaddress_IDEX <= jump_address;
+		END IF;
+	END IF;
+
+	
 	
 END PROCESS;
 
 --ex/mem
 PROCESS (slow_clock)
 BEGIN
-	spc_EXMEM <= spc_IDEX;	
-	
-	--MIPS_CONTROL
-	sregwrite_EXMEM <= sregwrite_IDEX;
-	smemread_EXMEM <= smemread_IDEX;
-	smemwrite_EXMEM <= smemwrite_IDEX;
-	smemtoreg_EXMEM <= smemtoreg_IDEX;
-	sbeq_EXMEM <= sbeq_IDEX;
-	sbne_EXMEM <= sbne_IDEX;
-	sregdest_EXMEM <= sregdest_IDEX;
-	sjal_EXMEM <= sjal_IDEX;	
-	sjump_EXMEM <= sjump_IDEX;	
-	sjr_EXMEM <= sjr_IDEX;
-	--register_file
-	sreaddata2_EXMEM <= sreaddata2_IDEX;
-		
-	--ALU Main
-	salumainresult_EXMEM <= alu_result_internal;	
-	
-	sjumpaddress_EXMEM <= sjumpaddress_IDEX;
-	
-	
+	IF RISING_EDGE(slow_clock) THEN
+		IF (reset_stages = '1') THEN						
+			spc_EXMEM <= x"00000000";		
+			--MIPS_CONTROL
+			sregwrite_EXMEM <= '0';
+			smemread_EXMEM <= '0';
+			smemwrite_EXMEM <= '0';
+			smemtoreg_EXMEM <= '0';
+			sbeq_EXMEM <= '0';
+			sbne_EXMEM <= '0';
+			sregdest_EXMEM <= '0';
+			sjal_EXMEM <= '0';	
+			sjump_EXMEM <= '0';	
+			sjr_EXMEM <= '0';
+			--register_file
+			sreaddata2_EXMEM <= X"00000000";				
+			--ALU Main
+			salumainresult_EXMEM <= X"00000000";				
+			sjumpaddress_EXMEM <= X"00000000";
+		ELSE
+			spc_EXMEM <= spc_IDEX;		
+			--MIPS_CONTROL
+			sregwrite_EXMEM <= sregwrite_IDEX;
+			smemread_EXMEM <= smemread_IDEX;
+			smemwrite_EXMEM <= smemwrite_IDEX;
+			smemtoreg_EXMEM <= smemtoreg_IDEX;
+			sbeq_EXMEM <= sbeq_IDEX;
+			sbne_EXMEM <= sbne_IDEX;
+			sregdest_EXMEM <= sregdest_IDEX;
+			sjal_EXMEM <= sjal_IDEX;	
+			sjump_EXMEM <= sjump_IDEX;	
+			sjr_EXMEM <= sjr_IDEX;
+			--register_file
+			sreaddata2_EXMEM <= sreaddata2_IDEX;				
+			--ALU Main
+			salumainresult_EXMEM <= alu_result_internal;				
+			sjumpaddress_EXMEM <= sjumpaddress_IDEX;
+		END IF;
+	END IF;
 END PROCESS;
 
 --mem/wb
 PROCESS (slow_clock)
 BEGIN
-	spc_MEMWB <= spc_EXMEM;
-	
-	--MIPS_CONTROL
-	sregwrite_MEMWB <= sregwrite_EXMEM;	
-	smemtoreg_MEMWB <= smemtoreg_EXMEM;
-	sjal_MEMWB <= sjal_EXMEM;
-			
-	--ALU Main
-	salumainresult_MEMWB <= salumainresult_EXMEM;
-	smemreaddata_MEMWB <= mux_memory_input1;
+
+	IF RISING_EDGE(slow_clock) THEN
+		IF (reset_stages = '1') THEN									
+			spc_MEMWB <= x"00000000";	
+			--MIPS_CONTROL
+			sregwrite_MEMWB <= '0';	
+			smemtoreg_MEMWB <= '0';
+			sjal_MEMWB <= '0';				
+			--ALU Main
+			salumainresult_MEMWB <= X"00000000";
+			smemreaddata_MEMWB <= X"00000000";
+		ELSE
+			spc_MEMWB <= spc_EXMEM;	
+			--MIPS_CONTROL
+			sregwrite_MEMWB <= sregwrite_EXMEM;	
+			smemtoreg_MEMWB <= smemtoreg_EXMEM;
+			sjal_MEMWB <= sjal_EXMEM;				
+			--ALU Main
+			salumainresult_MEMWB <= salumainresult_EXMEM;
+			smemreaddata_MEMWB <= mux_memory_input1;
+		END IF;
+	END IF;
 	
 END PROCESS;
 
 PROCESS (mux_branch_sel,sjump_IDEX)
 BEGIN
-	IF (mux_branch_sel OR sjump_IDEX) THEN
+	IF (mux_branch_sel = '1' OR sjump_IDEX = '1') THEN
 		reset_stages <= '1';
 	END IF;
 END PROCESS; 
