@@ -29,7 +29,7 @@ SIGNAL regdest, alu_src, salusrc_IDEX, mem_to_reg, smemtoreg_IDEX, smemtoreg_EXM
 SIGNAL smemtoreg_MEMWB, bne_control, sbne_IDEX, sbne_EXMEM, beq_control, sbeq_IDEX : STD_LOGIC;
 SIGNAL sbeq_EXMEM,alu_zero, sjal_IDEX, sjal_EXMEM, sjal_MEMWB, jal_control, jr_control, sjr_IDEX, sjr_EXMEM : STD_LOGIC; 
 SIGNAL mem_read, smemread_IDEX, smemread_EXMEM, mem_write, smemwrite_IDEX, smemwrite_EXMEM : STD_LOGIC;
-SIGNAL sjump_IDEX, sjump_EXMEM, jump_control, mux_branch_sel, branch_bne_input, branch_beq_input, local_reset, debug_reset: STD_LOGIC;
+SIGNAL sjump_IDEX, sjump_EXMEM, jump_control, mux_branch_sel, branch_bne_input, branch_beq_input, local_reset, reset_stages, debug_reset: STD_LOGIC;
 
 SIGNAL regdestmux, mux_write_register, read_reg1_input : STD_LOGIC_VECTOR (4 DOWNTO 0);
 
@@ -130,10 +130,9 @@ BEGIN
 	
 --Mapped output to if/id stage	
 PROCESS (pc_counter)
-BEGIN
+BEGIN	
 	pc_counter_input <= pc_counter + 4;
 	PC_out <= pc_counter_input;
-	--pc_counter_input <= pc_counter;
 END PROCESS;
 
 PROCESS (sinstruction_IFID)
@@ -163,8 +162,15 @@ END PROCESS;
 --if/id
 PROCESS (slow_clock)
 BEGIN
-	sinstruction_IFID <= instruction;
-	spc_IFID <= pc_counter_input; --mapped
+	IF RISING_EDGE(slow_clock) THEN
+		IF (reset_stages = '1') THEN
+			sinstruction_IFID <= "0";
+			spc_IFID <= "0";
+		ELSE
+			sinstruction_IFID <= instruction;
+			spc_IFID <= pc_counter_input; --mapped
+		END IF;
+	END IF;
 END PROCESS;
 
 --id/ex
@@ -236,7 +242,12 @@ BEGIN
 	
 END PROCESS;
 
-
+PROCESS (mux_branch_sel,sjump_IDEX)
+BEGIN
+	IF (mux_branch_sel OR sjump_IDEX) THEN
+		reset_stages <= '1';
+	END IF;
+END PROCESS; 
 
 
 pc_mips: PC PORT MAP  (
@@ -246,7 +257,7 @@ pc_mips: PC PORT MAP  (
 
 --Mapped output to if/id stage
 rom    : ROMVHDL PORT MAP (
-								clock => fast_clock, address => pc_counter(7 DOWNTO 2), q => instruction
+								clock => NOT slow_clock, address => pc_counter(7 DOWNTO 2), q => instruction
 							 );
 
 control: MIPS_CONTROL PORT MAP ( opcode => sinstruction_IFID(31 DOWNTO 26), funct => sinstruction_IFID(5 DOWNTO 0),
@@ -259,7 +270,7 @@ control: MIPS_CONTROL PORT MAP ( opcode => sinstruction_IFID(31 DOWNTO 26), func
 --Jal, Jr		: OUT STD_LOGIC;
 
 							  
-reg_file : register_file PORT MAP (	clock => slow_clock, reset => local_reset, RegWrite => sregwrite_MEMWB,
+reg_file : register_file PORT MAP (	clock => NOT slow_clock, reset => local_reset, RegWrite => sregwrite_MEMWB,
 												read_reg1 => sinstruction_IFID(25 DOWNTO 21), read_reg2 => sinstruction_IFID(20 DOWNTO 16),
 												write_reg => mux_write_register, read_data1 => read_data1_reg, read_data2 => read_data2_reg,
 												write_data => write_data_input
@@ -278,7 +289,7 @@ mux_memory : mux32 PORT MAP ( input0 => alu_result_internal, input1 => smemreadd
 											      );	
 																										
 mux_jump : mux32 PORT MAP ( input0 => mux_jump_input0, input1 => jump_address,
-													 sel => jump_control, output => mux_jump_output 
+													 sel => sjump_IDEX, output => mux_jump_output 
 											      );	
 
 mux_branch : mux32 PORT MAP ( input0 => spc_IDEX, input1 => mux_branch_input1,
@@ -316,7 +327,7 @@ alu_branch : alu PORT MAP ( inputA => pc_counter_input, inputB => alu_branch_inp
 								  );								  
 								  
 								  
-mem : RAM PORT MAP ( clock => fast_clock, address => salumainresult_EXMEM(7 DOWNTO 2), 
+mem : RAM PORT MAP ( clock => NOT slow_clock, address => salumainresult_EXMEM(7 DOWNTO 2), 
 							data => read_data2_reg, rden => smemread_EXMEM, 
 							wren => smemwrite_EXMEM, q => mux_memory_input1   
 						  );	

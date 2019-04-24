@@ -2,9 +2,10 @@
 reset => PC:pc_mips.reset
 reset => register_file:reg_file.reset
 slow_clock => PC:pc_mips.clock
+slow_clock => ROMVHDL:rom.clock
 slow_clock => register_file:reg_file.clock
-fast_clock => ROMVHDL:rom.clock
-fast_clock => RAM:mem.clock
+slow_clock => RAM:mem.clock
+fast_clock => ~NO_FANOUT~
 PC_out[0] <= PC:pc_mips.pc_output[0]
 PC_out[1] <= PC:pc_mips.pc_output[1]
 PC_out[2] <= Add0.DB_MAX_OUTPUT_PORT_TYPE

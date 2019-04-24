@@ -710,10 +710,6 @@
 				{
 					"name" : "reset",
 					"strict" : false
-				},
-				{
-					"name" : "fast_clock",
-					"strict" : false
 				}
 			]
 		}

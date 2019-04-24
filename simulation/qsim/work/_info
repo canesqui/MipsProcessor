@@ -1,0 +1,50 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/simulation/qsim
+vmips_processor
+Z1 !s110 1556139593
+!i10b 1
+!s100 b1_1Ma483D=DiUd12MI5[3
+IzEe1f^JCL?@102SSao=a>0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1556139590
+8Lab.vo
+FLab.vo
+L0 32
+Z3 OV;L;10.4b;61
+r1
+!s85 0
+31
+!s108 1556139592.000000
+!s107 Lab.vo|
+!s90 -work|work|Lab.vo|
+!i113 1
+Z4 o-work work
+vmips_processor_vlg_vec_tst
+R1
+!i10b 1
+!s100 hn4TW`A6z<Z0PW]h7iSTh3
+IV3O9[=nbIz<JYT8<?IEc_2
+R2
+R0
+w1556139585
+8mips_processor.vwf.vt
+Fmips_processor.vwf.vt
+L0 30
+R3
+r1
+!s85 0
+31
+!s108 1556139593.000000
+!s107 mips_processor.vwf.vt|
+!s90 -work|work|mips_processor.vwf.vt|
+!i113 1
+R4
