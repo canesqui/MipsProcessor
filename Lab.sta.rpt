@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for Lab
-Sun Apr 21 10:02:30 2019
+Wed Apr 24 16:31:08 2019
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -98,7 +98,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 4      ;
+; Number detected on machine ; 8      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
 
@@ -1743,7 +1743,7 @@ No non-DPA dedicated SERDES Receiver circuitry present in device or used in desi
 Info: *******************************************************************
 Info: Running Quartus Prime TimeQuest Timing Analyzer
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Sun Apr 21 10:00:06 2019
+    Info: Processing started: Wed Apr 24 16:30:42 2019
 Info: Command: quartus_sta Lab -c Lab
 Info: qsta_default_script.tcl version: #1
 Warning (20028): Parallel compilation is not licensed and has been disabled
@@ -1945,9 +1945,9 @@ Info (332146): Worst-case minimum pulse width slack is -2.174
 Info (332102): Design is not fully constrained for setup requirements
 Info (332102): Design is not fully constrained for hold requirements
 Info: Quartus Prime TimeQuest Timing Analyzer was successful. 0 errors, 7 warnings
-    Info: Peak virtual memory: 5427 megabytes
-    Info: Processing ended: Sun Apr 21 10:02:30 2019
-    Info: Elapsed time: 00:02:24
-    Info: Total CPU time (on all processors): 00:02:14
+    Info: Peak virtual memory: 5436 megabytes
+    Info: Processing ended: Wed Apr 24 16:31:08 2019
+    Info: Elapsed time: 00:00:26
+    Info: Total CPU time (on all processors): 00:00:25
 
 
