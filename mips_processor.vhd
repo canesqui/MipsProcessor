@@ -157,6 +157,42 @@ BEGIN
 	--dbg_alu_max_input1 <= alu_mux_input1;
 END PROCESS;
 
+
+--if/id
+PROCESS (clock)
+BEGIN
+	sinstruction <= instruction,
+	spc <= pc_counter
+END PROCESS;
+
+--id/ex
+PROCESS (clock)
+BEGIN
+	spc_IDEX <= pc_counter,	
+	--MIPS_CONTROL
+	sregwrite_IDEX <= regwrite_signal,
+	sregdest_IDEX <= regdest,
+	salusrc_IDEX <= alu_src,
+	salucontrol_IDEX <= alu_control,
+	smemtoreg_IDEX <= mem_to_reg,
+	sjal_IDEX <= jal_control,
+	smemread_IDEX <= mem_read,
+	smemwrite_IDEX <= mem_write,
+	sjump_IDEX <= jump_control,
+	sbeq_IDEX <= beq_control,
+	sbne_IDEX <= bne_control,
+	sjr_IDEX <= jr_control,
+	--register_file
+	sreaddata1_IDEX <= read_data1_reg,
+	sreaddata2_IDEX <= read_data2_reg,
+	--signextend
+	ssignextend_IDEX <= alu_mux_input1,
+	
+END PROCESS;
+
+
+
+
 pc_mips: PC PORT MAP  (
 								clock => slow_clock, reset => local_reset, pc_output => pc_counter, 
 								pc_input => mux_pc_input--mux_jump_output
