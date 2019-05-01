@@ -31,7 +31,7 @@ SIGNAL sbeq_EXMEM,alu_zero, sjal_IDEX, sjal_EXMEM, sjal_MEMWB, jal_control, jr_c
 SIGNAL mem_read, smemread_IDEX, smemread_EXMEM, mem_write, smemwrite_IDEX, smemwrite_EXMEM : STD_LOGIC;
 SIGNAL sjump_IDEX, sjump_EXMEM, jump_control, mux_branch_sel, branch_bne_input, branch_beq_input, local_reset, reset_stages, debug_reset: STD_LOGIC;
 
-SIGNAL regdestmux, mux_write_register, read_reg1_input : STD_LOGIC_VECTOR (4 DOWNTO 0);
+SIGNAL regdestmux, mux_write_register, read_reg1_input, sreadreg1_IF, sreadreg1_IFID, sreadreg2_IFID, sreadreg1_EXMEM, sreadreg2_EXMEM, : STD_LOGIC_VECTOR (4 DOWNTO 0);
 
 SIGNAL alu_control, salucontrol_IDEX                    : STD_LOGIC_VECTOR (3 DOWNTO 0);
 COMPONENT PC IS
@@ -115,6 +115,13 @@ COMPONENT andgate IS
 END COMPONENT;
 
 COMPONENT orgate IS
+    Port ( InputA   : IN  STD_LOGIC;
+           InputB   : IN  STD_LOGIC;
+           Output   : OUT STD_LOGIC
+			);  
+END COMPONENT;
+
+COMPONENT forwarding IS
     Port ( InputA   : IN  STD_LOGIC;
            InputB   : IN  STD_LOGIC;
            Output   : OUT STD_LOGIC
@@ -220,6 +227,9 @@ BEGIN
 			--signextend
 			ssignextend_IDEX <= alu_mux_input1;	
 			sjumpaddress_IDEX <= jump_address;
+			--Going to go to the Forwarding Unit
+			sreadreg1_IDEX <= sinstruction_IFID(25 DOWNTO 21);
+			sreadreg2_IDEX <= sinstruction_IFID(20 DOWNTO 16);
 		END IF;
 	END IF;
 
@@ -398,6 +408,9 @@ beq_and : andgate PORT MAP ( inputA => sbeq_EXMEM, inputB => alu_zero, output =>
 branch : orgate PORT MAP ( inputA => branch_bne_input, inputB => branch_beq_input, output => mux_branch_sel
 								  );									
 
-							 
+forward : forwarding PORT MAP ( inputA => pc_counter_input, inputB => alu_branch_input1, 
+										  ALUControl => "0010", shamt => "00000",
+										  ALU_Result => mux_branch_input1
+										);							 
 								
 END behavior;

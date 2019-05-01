@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition"
 
--- DATE "04/24/2019 19:44:01"
+-- DATE "04/24/2019 20:08:33"
 
 -- 
 -- Device: Altera 5CGXFC7C7F23C8 Package FBGA484
@@ -41,14 +41,14 @@ ENTITY 	mips_processor IS
 	reset : IN std_logic;
 	slow_clock : IN std_logic;
 	fast_clock : IN std_logic;
-	PC_out : OUT std_logic_vector(31 DOWNTO 0);
-	Instruction_out : OUT std_logic_vector(31 DOWNTO 0);
-	Read_reg1_out : OUT std_logic_vector(4 DOWNTO 0);
-	Read_reg2_out : OUT std_logic_vector(4 DOWNTO 0);
-	Write_reg_out : OUT std_logic_vector(4 DOWNTO 0);
-	Read_data1_out : OUT std_logic_vector(31 DOWNTO 0);
-	Read_data2_out : OUT std_logic_vector(31 DOWNTO 0);
-	Write_data_out : OUT std_logic_vector(31 DOWNTO 0)
+	PC_out : BUFFER std_logic_vector(31 DOWNTO 0);
+	Instruction_out : BUFFER std_logic_vector(31 DOWNTO 0);
+	Read_reg1_out : BUFFER std_logic_vector(4 DOWNTO 0);
+	Read_reg2_out : BUFFER std_logic_vector(4 DOWNTO 0);
+	Write_reg_out : BUFFER std_logic_vector(4 DOWNTO 0);
+	Read_data1_out : BUFFER std_logic_vector(31 DOWNTO 0);
+	Read_data2_out : BUFFER std_logic_vector(31 DOWNTO 0);
+	Write_data_out : BUFFER std_logic_vector(31 DOWNTO 0)
 	);
 END mips_processor;
 
