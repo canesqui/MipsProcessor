@@ -13,8 +13,8 @@ ENTITY forwarding IS
 			
 			fRead_data1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 			fRead_data2_in          : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			--fRead_reg1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
-			--fRead_reg2_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
+			fALU_result_EXMEM		   : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
+			freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
 			
 			fWrite_reg_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --fALU_result_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0)
 			fWrite_reg_MEMWB			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(4 DOWNTO 0);			
@@ -29,8 +29,8 @@ ARCHITECTURE behavior OF forwarding IS
 
 SIGNAL rd1_mux : STD_LOGIC_VECTOR (1 DOWNTO 0);	-- 2 bit mux
 SIGNAL rd2_mux	: STD_LOGIC_VECTOR (1 DOWNTO 0); -- 2 bit mux 
-SIGNAL sRead_data1_out	: STD_LOGIC_VECTOR (31 DOWNTO 0); -- signal for output
-SIGNAL sRead_data2_out	: STD_LOGIC_VECTOR (31 DOWNTO 0); -- signal for output
+--SIGNAL sRead_data1_out	: STD_LOGIC_VECTOR (31 DOWNTO 0); -- signal for output
+--SIGNAL sRead_data2_out	: STD_LOGIC_VECTOR (31 DOWNTO 0); -- signal for output
 SIGNAL local_reset, fReg_write_MEMWB : STD_LOGIC;
 
 --COMPONENT ROMVHDL IS
@@ -69,6 +69,9 @@ BEGIN
 
 PROCESS (fRegwrite_EXMEM,fReg_write_MEMWB, fWrite_reg_EXMEM, fRegwrite_MEMWB, fRS_IDEX, fRT_IDEX)
 BEGIN
+	--No hazard
+	rd1_mux <= "00";
+	rd2_mux <= "00";
 	--EX hazard
 	IF (((fRegwrite_EXMEM='1') and (fWrite_reg_EXMEM /= 0) and (fWrite_reg_EXMEM = fRS_IDEX))=true) THEN	
 		rd1_mux <= "10";
@@ -116,19 +119,19 @@ END PROCESS;
 
 
 	WITH (rd1_mux) SELECT
-	sRead_data1_out <= fRead_data1_in when "00",
-							 fWrite_reg_MEMWB when "01",	--fWrite_reg_MEMWB	-- mem	
-							 fWrite_reg_EXMEM when "10",	-- fWrite_reg_EXMEM	-- ALU
+	fRead_data1_out <= fRead_data1_in when "00",
+							 freg_writedata_MEMWB when "01",	--fWrite_reg_MEMWB	-- mem	
+							 fALU_result_EXMEM when "10",	-- fWrite_reg_EXMEM	-- ALU
 							 --A(3) when "11",
-							 "00000" when others;
+							 X"00000000" when others;
 
 
-	WITH rd2_mux SELECT
-	sRead_data2_out <= fRead_data2_in when "00",		-- recheck this next two, 
-							 fWrite_reg_MEMWB when "01",	--fWrite_reg_MEMWB	-- mem	
-							 fWrite_reg_EXMEM when "10",	-- fWrite_reg_EXMEM	-- ALU
+	WITH (rd2_mux) SELECT
+	fRead_data2_out <= fRead_data2_in when "00",		-- recheck this next two, 
+							 freg_writedata_MEMWB when "01",	--fWrite_reg_MEMWB	-- mem	
+							 fALU_result_EXMEM when "10",	-- fWrite_reg_EXMEM	-- ALU
 							 --A(3) when "11",
-							 "00000" when others;
+							 X"00000000" when others;
 
 	
 	

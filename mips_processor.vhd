@@ -33,7 +33,7 @@ SIGNAL sbeq_EXMEM,alu_zero, sjal_IDEX, sjal_EXMEM, sjal_MEMWB, jal_control, jr_c
 SIGNAL mem_read, smemread_IDEX, smemread_EXMEM, mem_write, smemwrite_IDEX, smemwrite_EXMEM : STD_LOGIC;
 SIGNAL sjump_IDEX, sjump_EXMEM, jump_control, mux_branch_sel, branch_bne_input, branch_beq_input, local_reset, reset_stages, debug_reset: STD_LOGIC;
 
-SIGNAL regdestmux, mux_write_register, read_reg1_input, sreadreg1_IF, sreadreg1_IFID, sreadreg2_IFID, sreadreg1_MEMWB, sreadreg2_MEMWB, sreadreg1_EXMEM, sreadreg2_EXMEM, sreadreg1_IDEX, sreadreg2_IDEX : STD_LOGIC_VECTOR (4 DOWNTO 0);
+SIGNAL regdestmux, mux_write_register, swriteregister_IDEX, swriteregister_EXMEM, swriteregister_MEMWB, read_reg1_input, sreadreg1_IF, sreadreg1_IFID, sreadreg2_IFID, sreadreg1_MEMWB, sreadreg2_MEMWB, sreadreg1_EXMEM, sreadreg2_EXMEM, sreadreg1_IDEX, sreadreg2_IDEX : STD_LOGIC_VECTOR (4 DOWNTO 0);
 
 SIGNAL alu_control, salucontrol_IDEX                    : STD_LOGIC_VECTOR (3 DOWNTO 0);
 COMPONENT PC IS
@@ -123,7 +123,6 @@ COMPONENT orgate IS
 			);  
 END COMPONENT;
 
-
 COMPONENT forwarding IS
     Port ( 
 	 
@@ -132,8 +131,8 @@ COMPONENT forwarding IS
 			
 			fRead_data1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);
 			fRead_data2_in          : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			--fRead_reg1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
-			--fRead_reg2_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
+			fALU_result_EXMEM			: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
+			freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
 			
 			fWrite_reg_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --fALU_result_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0)
 			fWrite_reg_MEMWB			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(4 DOWNTO 0);			
@@ -226,6 +225,7 @@ BEGIN
 			sjumpaddress_IDEX <= X"00000000";
 			sreadreg1_IDEX <= "00000";
 			sreadreg2_IDEX <= "00000";
+			swriteregister_IDEX <= "00000";
 		ELSE
 			spc_IDEX <= spc_IFID;	
 			--MIPS_CONTROL
@@ -250,6 +250,7 @@ BEGIN
 			--Going to go to the Forwarding Unit
 			sreadreg1_IDEX <= sinstruction_IFID(25 DOWNTO 21);
 			sreadreg2_IDEX <= sinstruction_IFID(20 DOWNTO 16);
+			swriteregister_IDEX <= mux_write_register;
 		END IF;
 	END IF;
 
@@ -305,6 +306,7 @@ BEGIN
 			--
 			sreadreg1_EXMEM <= sreadreg1_IDEX;
 			sreadreg2_EXMEM <= sreadreg2_IDEX;
+			swriteregister_EXMEM <= swriteregister_IDEX;
 		END IF;
 	END IF;
 END PROCESS;
@@ -339,6 +341,8 @@ BEGIN
 			--
 			sreadreg1_MEMWB <= sreadreg1_EXMEM;
 			sreadreg2_MEMWB <= sreadreg2_EXMEM;
+			--
+			swriteregister_MEMWB <= swriteregister_EXMEM;
 		END IF;
 	END IF;
 	
@@ -444,14 +448,14 @@ beq_and : andgate PORT MAP ( inputA => sbeq_EXMEM, inputB => alu_zero, output =>
 									
 branch : orgate PORT MAP ( inputA => branch_bne_input, inputB => branch_beq_input, output => mux_branch_sel
 								  );									
-								  
-								  
+								  							  
 --sregwrite_MEMWB <= sregwrite_EXMEM;	
+
 							  
-								  
 forward : forwarding PORT MAP ( fRegwrite_EXMEM => sregwrite_EXMEM, fRegwrite_MEMWB => sregwrite_MEMWB, 
-										  fRead_data1_in => sreaddata1_IDEX, fRead_data2_in => sreaddata2_IDEX,										  										 										  
-										  fWrite_reg_EXMEM => sreadreg1_IDEX, fWrite_reg_MEMWB => sreadreg2_IDEX,
+										  fRead_data1_in => sreaddata1_IDEX, fRead_data2_in => sreaddata2_IDEX,
+										  fALU_result_EXMEM => salumainresult_EXMEM, freg_writedata_MEMWB => alu_memory_result,
+										  fWrite_reg_EXMEM => swriteregister_EXMEM, fWrite_reg_MEMWB => swriteregister_MEMWB,
 										  fRS_IDEX => sreadreg1_IDEX, fRT_IDEX => sreadreg2_IDEX,
 										  fRead_data1_out => alu_input_a, fRead_data2_out => alu_input_b
 										);							 
