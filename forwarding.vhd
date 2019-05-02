@@ -73,9 +73,9 @@ BEGIN
 	rd1_mux <= "00";
 	rd2_mux <= "00";
 	--EX hazard
-	IF (((fRegwrite_EXMEM = 1) 
-		and (fWrite_reg_EXMEM /= "00000") 
-		and (fWrite_reg_EXMEM = fRS_IDEX)) = '1') THEN	
+	IF (((fRegwrite_EXMEM = '1') 
+	and (fWrite_reg_EXMEM /= "00000") 
+	and (fWrite_reg_EXMEM = fRS_IDEX))) THEN	
 		rd1_mux <= "10"; 
 	--MEM hazard
 	ELSIF (((fRegwrite_MEMWB = '1') 
@@ -83,14 +83,14 @@ BEGIN
 		and not ((fRegwrite_EXMEM = '1') 
 		and (fWrite_reg_EXMEM /= "00000") -- make sure that the not is for the combination of the two
 		and (fWrite_reg_EXMEM = fRS_IDEX)) 
-		and (fWrite_reg_MEMWB = fRS_IDEX)) = '1') THEN
+		and (fWrite_reg_MEMWB = fRS_IDEX))) THEN
 		
 		rd1_mux <= "01";
 	END IF;
 	--EX hazard
 	IF (((fRegwrite_EXMEM = '1') 
 		and (fWrite_reg_EXMEM /= "00000") 
-		and (fWrite_reg_EXMEM = fRT_IDEX)) = '1') THEN
+		and (fWrite_reg_EXMEM = fRT_IDEX))) THEN
 		rd2_mux <= "10";
 	--MEM hazard
 	ELSIF (((fRegwrite_MEMWB = '1') 
@@ -98,7 +98,7 @@ BEGIN
 		and not ((fRegwrite_EXMEM = '1') 
 		and (fWrite_reg_EXMEM /= "00000") 
 		and (fWrite_reg_EXMEM = fRT_IDEX)) 
-		and (fWrite_reg_MEMWB = fRT_IDEX)) = '1') THEN
+		and (fWrite_reg_MEMWB = fRT_IDEX))) THEN
 		
 		rd2_mux <= "01";
 	END IF;
