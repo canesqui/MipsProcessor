@@ -124,24 +124,25 @@ COMPONENT orgate IS
 END COMPONENT;
 
 COMPONENT forwarding IS
-    Port ( 
-	 
-			fRegwrite_EXMEM			: IN STD_LOGIC;
-			fRegwrite_MEMWB         : IN STD_LOGIC;
+	PORT(
+			--reset 	 				   : OUT STD_LOGIC;
+			--slow_clock				   : IN STD_LOGIC;
 			
-			fRead_data1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			fRead_data2_in          : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			fALU_result_EXMEM			: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
-			freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
+			fRegwrite_EXMEM			: IN STD_LOGIC;	-- reg write signal from EX/Mem
+			fRegwrite_MEMWB         : IN STD_LOGIC;	-- reg write signal from Ex/Mem
 			
-			fWrite_reg_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --fALU_result_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0)
-			fWrite_reg_MEMWB			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(4 DOWNTO 0);			
-			fRS_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+			fRead_data1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 in from register file
+			fRead_data2_in          : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata2 in from register file
+			fALU_result_EXMEM		   : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- EX/Mem ALU result
+			freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(31 DOWNTO 0); -- Mem/WB write register data 
 			
-			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)	 
-			);  
+			fWrite_reg_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- write register from Ex/Mem 			
+			fWrite_reg_MEMWB			: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- write register from Mem/WB			
+			fRS_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RS register from ID/EX
+			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RT register from ID/EX
+			
+			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 out to alu
+			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	-- readdata2 out to alu 
 END COMPONENT;
 
 
@@ -452,12 +453,18 @@ branch : orgate PORT MAP ( inputA => branch_bne_input, inputB => branch_beq_inpu
 --sregwrite_MEMWB <= sregwrite_EXMEM;	
 
 							  
-forward : forwarding PORT MAP ( fRegwrite_EXMEM => sregwrite_EXMEM, fRegwrite_MEMWB => sregwrite_MEMWB, 
-										  fRead_data1_in => sreaddata1_IDEX, fRead_data2_in => sreaddata2_IDEX,
-										  fALU_result_EXMEM => salumainresult_EXMEM, freg_writedata_MEMWB => alu_memory_result,
-										  fWrite_reg_EXMEM => swriteregister_EXMEM, fWrite_reg_MEMWB => swriteregister_MEMWB,
-										  fRS_IDEX => sreadreg1_IDEX, fRT_IDEX => sreadreg2_IDEX,
-										  fRead_data1_out => alu_input_a, fRead_data2_out => alu_input_b
+forward : forwarding PORT MAP ( fRegwrite_EXMEM => sregwrite_EXMEM, 
+										  fRegwrite_MEMWB => sregwrite_MEMWB, 
+										  fRead_data1_in => sreaddata1_IDEX, 
+										  fRead_data2_in => sreaddata2_IDEX,
+										  fALU_result_EXMEM => salumainresult_EXMEM, 
+										  freg_writedata_MEMWB => alu_memory_result,
+										  fWrite_reg_EXMEM => swriteregister_EXMEM, 
+										  fWrite_reg_MEMWB => swriteregister_MEMWB,
+										  fRS_IDEX => sreadreg1_IDEX, 
+										  fRT_IDEX => sreadreg2_IDEX,
+										  fRead_data1_out => alu_input_a, 
+										  fRead_data2_out => alu_input_b
 										);							 
 		
 END behavior;

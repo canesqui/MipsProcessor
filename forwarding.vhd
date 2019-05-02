@@ -8,21 +8,21 @@ ENTITY forwarding IS
 			--reset 	 				   : OUT STD_LOGIC;
 			--slow_clock				   : IN STD_LOGIC;
 			
-			fRegwrite_EXMEM			: IN STD_LOGIC;
-			fRegwrite_MEMWB         : IN STD_LOGIC;
+			fRegwrite_EXMEM			: IN STD_LOGIC;	-- reg write signal from EX/Mem
+			fRegwrite_MEMWB         : IN STD_LOGIC;	-- reg write signal from Ex/Mem
 			
-			fRead_data1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			fRead_data2_in          : IN STD_LOGIC_VECTOR(31 DOWNTO 0);
-			fALU_result_EXMEM		   : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
-			freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- what are these for?
+			fRead_data1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 in from register file
+			fRead_data2_in          : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata2 in from register file
+			fALU_result_EXMEM		   : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- EX/Mem ALU result
+			freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(31 DOWNTO 0); -- Mem/WB write register data 
 			
-			fWrite_reg_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --fALU_result_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0)
-			fWrite_reg_MEMWB			: IN STD_LOGIC_VECTOR(4 DOWNTO 0); --freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(4 DOWNTO 0);			
-			fRS_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);
-			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);
+			fWrite_reg_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- write register from Ex/Mem 			
+			fWrite_reg_MEMWB			: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- write register from Mem/WB			
+			fRS_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RS register from ID/EX
+			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RT register from ID/EX
 			
-			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 out to alu
+			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	-- readdata2 out to alu
 END forwarding;
 
 ARCHITECTURE behavior OF forwarding IS
@@ -67,34 +67,56 @@ BEGIN
 --	END IF;
 --END PROCESS; 
 
-PROCESS (fRegwrite_EXMEM,fReg_write_MEMWB, fWrite_reg_EXMEM, fRegwrite_MEMWB, fRS_IDEX, fRT_IDEX)
+PROCESS (fRegwrite_EXMEM, fRegwrite_MEMWB, fWrite_reg_EXMEM, fWrite_reg_MEMWB, fRS_IDEX, fRT_IDEX)
 BEGIN
 	--No hazard
 	rd1_mux <= "00";
 	rd2_mux <= "00";
 	--EX hazard
-	IF (((fRegwrite_EXMEM='1') and (fWrite_reg_EXMEM /= 0) and (fWrite_reg_EXMEM = fRS_IDEX))=true) THEN	
-		rd1_mux <= "10";
-	END IF; 
-	
-	IF (((fRegwrite_EXMEM='1') and (fWrite_reg_EXMEM /= 0) and (fWrite_reg_EXMEM = fRT_IDEX))=true) THEN
-		rd2_mux <= "10";
-	END IF;
-	
+	IF (((fRegwrite_EXMEM = 1) 
+		and (fWrite_reg_EXMEM /= "00000") 
+		and (fWrite_reg_EXMEM = fRS_IDEX)) = '1') THEN	
+		rd1_mux <= "10"; 
 	--MEM hazard
-	IF (((fRegwrite_MEMWB='1') and (fWrite_reg_MEMWB /= 0) 
-		and not (fRegwrite_EXMEM='1' and (fWrite_reg_EXMEM /= 0) 
-		and (fWrite_reg_EXMEM = fRS_IDEX)) and (fWrite_reg_MEMWB = fRS_IDEX))=true) THEN
+	ELSIF (((fRegwrite_MEMWB = '1') 
+		and (fWrite_reg_MEMWB /= "00000") 
+		and not ((fRegwrite_EXMEM = '1') 
+		and (fWrite_reg_EXMEM /= "00000") -- make sure that the not is for the combination of the two
+		and (fWrite_reg_EXMEM = fRS_IDEX)) 
+		and (fWrite_reg_MEMWB = fRS_IDEX)) = '1') THEN
 		
 		rd1_mux <= "01";
 	END IF;
-	
-	IF (((fRegwrite_MEMWB='1') and (fWrite_reg_MEMWB /= 0)
-		and not (fRegwrite_EXMEM='1' and (fWrite_reg_EXMEM /= 0) 
-		and (fWrite_reg_EXMEM = fRT_IDEX)) and (fWrite_reg_MEMWB = fRT_IDEX))=true) THEN
+	--EX hazard
+	IF (((fRegwrite_EXMEM = '1') 
+		and (fWrite_reg_EXMEM /= "00000") 
+		and (fWrite_reg_EXMEM = fRT_IDEX)) = '1') THEN
+		rd2_mux <= "10";
+	--MEM hazard
+	ELSIF (((fRegwrite_MEMWB = '1') 
+		and (fWrite_reg_MEMWB /= "00000")
+		and not ((fRegwrite_EXMEM = '1') 
+		and (fWrite_reg_EXMEM /= "00000") 
+		and (fWrite_reg_EXMEM = fRT_IDEX)) 
+		and (fWrite_reg_MEMWB = fRT_IDEX)) = '1') THEN
 		
 		rd2_mux <= "01";
 	END IF;
+	
+	--MEM hazard
+--	IF (((fRegwrite_MEMWB = '1') and (fWrite_reg_MEMWB /= 0) 
+--		and not (fRegwrite_EXMEM =  (fWrite_reg_EXMEM /= 0) 
+--		and (fWrite_reg_EXMEM = fRS_IDEX)) and (fWrite_reg_MEMWB = fRS_IDEX)) = true) THEN
+--		
+--		rd1_mux <= "01";
+--	END IF;
+--	
+--	IF (((fRegwrite_MEMWB = '1') and (fWrite_reg_MEMWB /= 0)
+--		and not (fRegwrite_EXMEM = '1' and (fWrite_reg_EXMEM /= 0) 
+--		and (fWrite_reg_EXMEM = fRT_IDEX)) and (fWrite_reg_MEMWB = fRT_IDEX)) = true) THEN
+--		
+--		rd2_mux <= "01";
+--	END IF;
 END PROCESS; 
 
 --1a. EX/MEM.RegisterRd = ID/EX.RegisterRs
