@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "05/03/2019 00:31:00"
+// Generated on "05/03/2019 12:02:04"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          mips_processor
 // 
@@ -30,34 +30,28 @@
 module mips_processor_vlg_vec_tst();
 // constants                                           
 // general purpose registers
-reg fast_clock;
 reg reset;
 reg slow_clock;
 // wires                                               
 wire [31:0] Instruction_out;
-wire [31:0] mux_one;
 wire [31:0] PC_out;
 wire [31:0] Read_data1_out;
 wire [31:0] Read_data2_out;
 wire [4:0] Read_reg1_out;
 wire [4:0] Read_reg2_out;
-wire sel_mux_jump;
 wire [31:0] Write_data_out;
 wire [4:0] Write_reg_out;
 
 // assign statements (if any)                          
 mips_processor i1 (
 // port map - connection between master ports and signals/registers   
-	.fast_clock(fast_clock),
 	.Instruction_out(Instruction_out),
-	.mux_one(mux_one),
 	.PC_out(PC_out),
 	.Read_data1_out(Read_data1_out),
 	.Read_data2_out(Read_data2_out),
 	.Read_reg1_out(Read_reg1_out),
 	.Read_reg2_out(Read_reg2_out),
 	.reset(reset),
-	.sel_mux_jump(sel_mux_jump),
 	.slow_clock(slow_clock),
 	.Write_data_out(Write_data_out),
 	.Write_reg_out(Write_reg_out)
@@ -65,14 +59,6 @@ mips_processor i1 (
 initial 
 begin 
 #20000000 $finish;
-end 
-
-// fast_clock
-always
-begin
-	fast_clock = 1'b0;
-	fast_clock = #50000 1'b1;
-	#50000;
 end 
 
 // slow_clock

@@ -6,16 +6,16 @@ use ieee.numeric_std.all;
 ENTITY mips_processor IS
 	PORT(
 			reset 	 				   : IN STD_LOGIC;
-			slow_clock, fast_clock  : IN STD_LOGIC;
+			slow_clock					: IN STD_LOGIC;
 			PC_out, Instruction_out : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			Read_reg1_out				: OUT STD_LOGIC_VECTOR( 4 DOWNTO 0);
 			Read_reg2_out				: OUT STD_LOGIC_VECTOR( 4 DOWNTO 0);
 			Write_reg_out				: OUT STD_LOGIC_VECTOR( 4 DOWNTO 0);
 			Read_data1_out				: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			Read_data2_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			Write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			mux_one						: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			sel_mux_jump			   : OUT STD_LOGIC);
+			Write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+			--jal_mux_input0				: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			--jal_mux_input1			   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
 END mips_processor;
 
 ARCHITECTURE behavior OF mips_processor IS
@@ -142,7 +142,8 @@ COMPONENT forwarding IS
 			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RT register from ID/EX
 			
 			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 out to alu
-			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	-- readdata2 out to alu 
+			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata2 out to alu 
+			rd1_out,rd2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));		
 END COMPONENT;
 
 
@@ -254,7 +255,8 @@ BEGIN
 			--Going to go to the Forwarding Unit
 			sreadreg1_IDEX <= sinstruction_IFID(25 DOWNTO 21);
 			sreadreg2_IDEX <= sinstruction_IFID(20 DOWNTO 16);
-			swriteregister_IDEX <= mux_write_register;
+			swriteregister_IDEX <= mux_write_register;					
+			
 		END IF;
 	END IF;
 
@@ -300,7 +302,7 @@ BEGIN
 			sregdest_EXMEM <= sregdest_IDEX;
 			sjal_EXMEM <= sjal_IDEX;	
 			sjump_EXMEM <= sjump_IDEX;	
-			sel_mux_jump <= sjump_IDEX;
+			--sel_mux_jump <= sjump_IDEX;
 			
 			sjr_EXMEM <= sjr_IDEX;
 			--register_file
@@ -315,8 +317,8 @@ BEGIN
 			sreadreg2_EXMEM <= sreadreg2_IDEX;
 			swriteregister_EXMEM <= swriteregister_IDEX;
 			
-			mux_one <= sjumpaddress_EXMEM;			
-			
+			--mux_one <= sjumpaddress_EXMEM;					
+
 		END IF;
 	END IF;
 END PROCESS;
@@ -353,7 +355,8 @@ BEGIN
 			sreadreg1_MEMWB <= sreadreg1_EXMEM;
 			sreadreg2_MEMWB <= sreadreg2_EXMEM;
 			--
-			swriteregister_MEMWB <= swriteregister_EXMEM;
+			swriteregister_MEMWB <= swriteregister_EXMEM;					
+			
 		END IF;
 	END IF;
 	
@@ -403,7 +406,7 @@ mux_alu : mux32 PORT MAP ( input0 => sreaddata2_IDEX, input1 => ssignextend_IDEX
 													 sel => salusrc_IDEX, output => alu_oper2 
 											      );	
 
-mux_memory : mux32 PORT MAP ( input0 => alu_result_internal, input1 => smemreaddata_MEMWB,
+mux_memory : mux32 PORT MAP ( input0 => salumainresult_MEMWB, input1 => smemreaddata_MEMWB,
 													 sel => smemtoreg_MEMWB, output => alu_memory_result 
 											      );	
 																										
@@ -466,7 +469,7 @@ branch : orgate PORT MAP ( inputA => branch_bne_input, inputB => branch_beq_inpu
 forward : forwarding PORT MAP ( fRegwrite_EXMEM => sregwrite_EXMEM, 
 										  fRegwrite_MEMWB => sregwrite_MEMWB, 
 										  fRead_data1_in => sreaddata1_IDEX, 
-										  fRead_data2_in => sreaddata2_IDEX,
+										  fRead_data2_in => alu_oper2,
 										  fALU_result_EXMEM => salumainresult_EXMEM, 
 										  freg_writedata_MEMWB => alu_memory_result,
 										  fWrite_reg_EXMEM => swriteregister_EXMEM, 
@@ -475,6 +478,8 @@ forward : forwarding PORT MAP ( fRegwrite_EXMEM => sregwrite_EXMEM,
 										  fRT_IDEX => sreadreg2_IDEX,
 										  fRead_data1_out => alu_input_a, 
 										  fRead_data2_out => alu_input_b
+										  --rd1_out => jal_mux_input0,
+										  --rd2_out => jal_mux_input1
 										);							 
 		
 END behavior;

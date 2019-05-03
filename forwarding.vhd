@@ -22,7 +22,8 @@ ENTITY forwarding IS
 			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RT register from ID/EX
 			
 			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 out to alu
-			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	-- readdata2 out to alu
+			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata2 out to alu
+			rd1_out,rd2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));			
 END forwarding;
 
 ARCHITECTURE behavior OF forwarding IS
@@ -139,7 +140,12 @@ END PROCESS;
 -- and (MEM/WB.RegisterRd = ID/EX.RegisterRt))
 -- ForwardB = 01
 
-
+	process(rd1_mux, rd2_mux)
+	begin
+		rd1_out <= fRead_data1_in;
+		rd2_out <= fRead_data2_in;
+	end process;
+	
 	WITH (rd1_mux) SELECT
 	fRead_data1_out <= fRead_data1_in when "00",
 							 freg_writedata_MEMWB when "01",	--fWrite_reg_MEMWB	-- mem	
