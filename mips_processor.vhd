@@ -453,18 +453,18 @@ branch : orgate PORT MAP ( inputA => branch_bne_input, inputB => branch_beq_inpu
 --sregwrite_MEMWB <= sregwrite_EXMEM;	
 
 							  
-forward : forwarding PORT MAP ( fRegwrite_EXMEM => sregwrite_EXMEM, 
-										  fRegwrite_MEMWB => sregwrite_MEMWB, 
-										  fRead_data1_in => sreaddata1_IDEX, 
-										  fRead_data2_in => sreaddata2_IDEX,
-										  fALU_result_EXMEM => salumainresult_EXMEM, 
-										  freg_writedata_MEMWB => alu_memory_result,
-										  fWrite_reg_EXMEM => swriteregister_EXMEM, 
-										  fWrite_reg_MEMWB => swriteregister_MEMWB,
-										  fRS_IDEX => sreadreg1_IDEX, 
-										  fRT_IDEX => sreadreg2_IDEX,
-										  fRead_data1_out => alu_input_a, 
-										  fRead_data2_out => alu_input_b
+forward : forwarding PORT MAP ( fRegwrite_EXMEM 		=> sregwrite_EXMEM, 
+										  fRegwrite_MEMWB 		=> sregwrite_MEMWB, 
+										  fRead_data1_in 			=> sreaddata1_IDEX, 
+										  fRead_data2_in 			=> sreaddata2_IDEX,
+										  fALU_result_EXMEM 		=> salumainresult_EXMEM, 
+										  freg_writedata_MEMWB  => alu_memory_result,
+										  fWrite_reg_EXMEM 		=> swriteregister_EXMEM, 
+										  fWrite_reg_MEMWB 		=> swriteregister_MEMWB,
+										  fRS_IDEX 					=> sreadreg1_IDEX, 
+										  fRT_IDEX 					=> sreadreg2_IDEX,
+										  fRead_data1_out 		=> alu_input_a, 
+									  fRead_data2_out 			=> alu_input_b
 										);							 
 		
 END behavior;

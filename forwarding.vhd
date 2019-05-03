@@ -80,8 +80,8 @@ BEGIN
 	--MEM hazard
 	ELSIF (((fRegwrite_MEMWB = '1') 
 		and (fWrite_reg_MEMWB /= "00000") 
-		and not ((fRegwrite_EXMEM = '1') 
-		and (fWrite_reg_EXMEM /= "00000") -- make sure that the not is for the combination of the two
+		and not ((fRegwrite_EXMEM = '1') -- make sure that the not is for the combination of the two
+		and (fWrite_reg_EXMEM /= "00000") 
 		and (fWrite_reg_EXMEM = fRS_IDEX)) 
 		and (fWrite_reg_MEMWB = fRS_IDEX))) THEN
 		
