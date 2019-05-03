@@ -14,14 +14,14 @@ ENTITY mips_processor IS
 			Read_data1_out				: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			Read_data2_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			Write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			main_alu_out				: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
-			--debug_instruction_out   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+			mux_one						: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			sel_mux_jump			   : OUT STD_LOGIC);
 END mips_processor;
 
 ARCHITECTURE behavior OF mips_processor IS
 
 SIGNAL pc_counter, pc_counter_input, spc_IFID, spc_IDEX, spc_EXMEM, spc_MEMWB, instruction, sinstruction_IFID, alu_mux_input1, ssignextend_IDEX : STD_LOGIC_VECTOR (31 DOWNTO 0);
-SIGNAL read_data1_reg, sreaddata1_IDEX, alu_input_a, alu_input_b, read_data2_reg, sreaddata2_IDEX, sreaddata2_EXMEM, alu_oper1, alu_oper2 : STD_LOGIC_VECTOR (31 DOWNTO 0); 
+SIGNAL read_data1_reg, sreaddata1_IDEX, sreaddata1_EXMEM, alu_input_a, alu_input_b, read_data2_reg, sreaddata2_IDEX, sreaddata2_EXMEM, alu_oper1, alu_oper2 : STD_LOGIC_VECTOR (31 DOWNTO 0); 
 SIGNAL temp_calc, mux_branch_input1, mux_jump_input0, mux_pc_input, alu_branch_input1 : STD_LOGIC_VECTOR (31 DOWNTO 0); 
 SIGNAL alu_result_internal, salumainresult_EXMEM, salumainresult_MEMWB, alu_memory_result, mux_memory_input1, smemreaddata_MEMWB, write_data_input : STD_LOGIC_VECTOR (31 DOWNTO 0);
 SIGNAL jump_address, sjumpaddress_IDEX, sjumpaddress_EXMEM, mux_jump_output : STD_LOGIC_VECTOR (31 DOWNTO 0);
@@ -161,7 +161,8 @@ END PROCESS;
 
 PROCESS (sinstruction_IFID)
 BEGIN
-	jump_address <= spc_IFID + (sinstruction_IFID(25 DOWNTO 0)&"00");	
+	--ronaldo
+	jump_address <= pc_counter_input(31 DOWNTO 28) & (sinstruction_IFID(25 DOWNTO 0)&"00");	
 	instruction_out <= sinstruction_IFID;
 	read_reg1_out <= sinstruction_IFID(25 DOWNTO 21);
 	read_reg2_out <= sinstruction_IFID(20 DOWNTO 16);	
@@ -239,6 +240,8 @@ BEGIN
 			smemread_IDEX <= mem_read;
 			smemwrite_IDEX <= mem_write;
 			sjump_IDEX <= jump_control;
+			--ronaldo
+			--sel_mux_jump <= jump_control;
 			sbeq_IDEX <= beq_control;
 			sbne_IDEX <= bne_control;
 			sjr_IDEX <= jr_control;
@@ -277,12 +280,14 @@ BEGIN
 			sjump_EXMEM <= '0';	
 			sjr_EXMEM <= '0';
 			--register_file
+			sreaddata1_EXMEM <= X"00000000";
 			sreaddata2_EXMEM <= X"00000000";				
 			--ALU Main
 			salumainresult_EXMEM <= X"00000000";				
 			sjumpaddress_EXMEM <= X"00000000";
 			sreadreg1_EXMEM <= "00000";
 			sreadreg2_EXMEM <= "00000";
+			swriteregister_EXMEM <= "00000";
 		ELSE
 			spc_EXMEM <= spc_IDEX;		
 			--MIPS_CONTROL
@@ -295,19 +300,23 @@ BEGIN
 			sregdest_EXMEM <= sregdest_IDEX;
 			sjal_EXMEM <= sjal_IDEX;	
 			sjump_EXMEM <= sjump_IDEX;	
+			sel_mux_jump <= sjump_IDEX;
+			
 			sjr_EXMEM <= sjr_IDEX;
 			--register_file
+			sreaddata1_EXMEM <= sreaddata1_IDEX;
 			sreaddata2_EXMEM <= sreaddata2_IDEX;				
 			--ALU Main
-			salumainresult_EXMEM <= alu_result_internal;	
-			--Debug purpose
-			main_alu_out <= alu_result_internal; 	
+			salumainresult_EXMEM <= alu_result_internal;				
 			--
 			sjumpaddress_EXMEM <= sjumpaddress_IDEX;
 			--
 			sreadreg1_EXMEM <= sreadreg1_IDEX;
 			sreadreg2_EXMEM <= sreadreg2_IDEX;
 			swriteregister_EXMEM <= swriteregister_IDEX;
+			
+			mux_one <= sjumpaddress_EXMEM;			
+			
 		END IF;
 	END IF;
 END PROCESS;
@@ -328,6 +337,7 @@ BEGIN
 			smemreaddata_MEMWB <= X"00000000";
 			sreadreg1_MEMWB <= "00000";
 			sreadreg2_MEMWB <= "00000";
+			swriteregister_MEMWB <= "00000";
 		ELSE
 			spc_MEMWB <= spc_EXMEM;	
 			--MIPS_CONTROL
@@ -349,9 +359,9 @@ BEGIN
 	
 END PROCESS;
 
-PROCESS (mux_branch_sel,sjump_IDEX)
+PROCESS (mux_branch_sel,sjump_EXMEM)
 BEGIN
-	IF (mux_branch_sel = '1' OR sjump_IDEX = '1') THEN
+	IF (mux_branch_sel = '1' OR sjump_EXMEM = '1') THEN
 			reset_stages <= '1';
 		ELSE
 			reset_stages <= '0';
@@ -397,11 +407,11 @@ mux_memory : mux32 PORT MAP ( input0 => alu_result_internal, input1 => smemreadd
 													 sel => smemtoreg_MEMWB, output => alu_memory_result 
 											      );	
 																										
-mux_jump : mux32 PORT MAP ( input0 => mux_jump_input0, input1 => jump_address,
-													 sel => sjump_IDEX, output => mux_jump_output 
+mux_jump : mux32 PORT MAP ( input0 => mux_jump_input0, input1 => sjumpaddress_EXMEM,
+													 sel => sjump_EXMEM, output => mux_jump_output 
 											      );	
 
-mux_branch : mux32 PORT MAP ( input0 => spc_IDEX, input1 => mux_branch_input1,
+mux_branch : mux32 PORT MAP ( input0 => spc_EXMEM, input1 => mux_branch_input1,
 													 sel => mux_branch_sel, output => mux_jump_input0 
 											      );	
 
@@ -411,8 +421,8 @@ mux_writeregister : mux PORT MAP ( input0 => regdestmux, input1 => "11111",
 											      );	
 													
 													
-mux_jr : mux32 PORT MAP ( input0 => mux_jump_output, input1 => sreaddata1_IDEX,
-													 sel => sjr_IDEX, output => mux_pc_input 
+mux_jr : mux32 PORT MAP ( input0 => mux_jump_output, input1 => sreaddata1_EXMEM,
+													 sel => sjr_EXMEM, output => mux_pc_input 
 											      );														
 
 

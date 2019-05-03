@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Lab
-Thu May 02 17:34:53 2019
+Fri May 03 00:25:34 2019
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -10,7 +10,27 @@ Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
   4. Parallel Compilation
-  5. Analysis & Synthesis Messages
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. User-Specified and Inferred Latches
+ 10. Registers Removed During Synthesis
+ 11. Removed Registers Triggering Further Register Optimizations
+ 12. General Register Statistics
+ 13. Inverted Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Source assignments for ROMVHDL:rom|altsyncram:altsyncram_component|altsyncram_up14:auto_generated
+ 16. Source assignments for RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated
+ 17. Parameter Settings for User Entity Instance: ROMVHDL:rom|altsyncram:altsyncram_component
+ 18. Parameter Settings for User Entity Instance: RAM:mem|altsyncram:altsyncram_component
+ 19. altsyncram Parameter Settings by Entity Instance
+ 20. Port Connectivity Checks: "alu:alu_branch"
+ 21. Port Connectivity Checks: "mux:mux_writeregister"
+ 22. Port Connectivity Checks: "mux32:mux_alu"
+ 23. Post-Synthesis Netlist Statistics for Top Partition
+ 24. Elapsed Time Per Partition
+ 25. Analysis & Synthesis Messages
 
 
 
@@ -34,22 +54,27 @@ agreement for further details.
 
 
 
-+---------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                              ;
-+-----------------------------+---------------------------------------------+
-; Analysis & Synthesis Status ; Failed - Thu May 02 17:34:53 2019           ;
-; Quartus Prime Version       ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
-; Revision Name               ; Lab                                         ;
-; Top-level Entity Name       ; mips_processor                              ;
-; Family                      ; Cyclone V                                   ;
-; Logic utilization (in ALMs) ; N/A until Partition Merge                   ;
-; Total registers             ; N/A until Partition Merge                   ;
-; Total pins                  ; N/A until Partition Merge                   ;
-; Total virtual pins          ; N/A until Partition Merge                   ;
-; Total block memory bits     ; N/A until Partition Merge                   ;
-; Total PLLs                  ; N/A until Partition Merge                   ;
-; Total DLLs                  ; N/A until Partition Merge                   ;
-+-----------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Fri May 03 00:25:34 2019       ;
+; Quartus Prime Version           ; 15.1.0 Build 185 10/21/2015 SJ Lite Edition ;
+; Revision Name                   ; Lab                                         ;
+; Top-level Entity Name           ; mips_processor                              ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 1460                                        ;
+; Total pins                      ; 211                                         ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 2,048                                       ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -146,9 +171,509 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 ; Processors                 ; Number ;
 +----------------------------+--------+
-; Number detected on machine ; 12     ;
+; Number detected on machine ; 8      ;
 ; Maximum allowed            ; 1      ;
 +----------------------------+--------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                         ;
++----------------------------------+-----------------+----------------------------------+------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                        ; File Name with Absolute Path                                                 ; Library ;
++----------------------------------+-----------------+----------------------------------+------------------------------------------------------------------------------+---------+
+; forwarding.vhd                   ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/forwarding.vhd         ;         ;
+; ROM.mif                          ; yes             ; User Memory Initialization File  ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROM.mif                ;         ;
+; ROMVHDL.vhd                      ; yes             ; User Wizard-Generated File       ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROMVHDL.vhd            ;         ;
+; RAM.vhd                          ; yes             ; User Wizard-Generated File       ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/RAM.vhd                ;         ;
+; signextend.vhd                   ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/signextend.vhd         ;         ;
+; register_file.vhd                ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/register_file.vhd      ;         ;
+; pc.vhd                           ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/pc.vhd                 ;         ;
+; orgate.vhd                       ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/orgate.vhd             ;         ;
+; mux.vhd                          ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mux.vhd                ;         ;
+; mips_processor.vhd               ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd     ;         ;
+; mips_control.vhd                 ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_control.vhd       ;         ;
+; max32.vhd                        ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/max32.vhd              ;         ;
+; and.vhd                          ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/and.vhd                ;         ;
+; alu.vhd                          ; yes             ; User VHDL File                   ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd                ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/altsyncram.tdf           ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/stratix_ram_block.inc    ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/lpm_mux.inc              ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/lpm_decode.inc           ;         ;
+; aglobal151.inc                   ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/aglobal151.inc           ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/a_rdenreg.inc            ;         ;
+; altrom.inc                       ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/altrom.inc               ;         ;
+; altram.inc                       ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/altram.inc               ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                     ; c:/altera_lite/15.1/quartus/libraries/megafunctions/altdpram.inc             ;         ;
+; db/altsyncram_up14.tdf           ; yes             ; Auto-Generated Megafunction      ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_up14.tdf ;         ;
+; db/altsyncram_imv3.tdf           ; yes             ; Auto-Generated Megafunction      ; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf ;         ;
++----------------------------------+-----------------+----------------------------------+------------------------------------------------------------------------------+---------+
+
+
++----------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                    ;
++---------------------------------------------+------------------+
+; Resource                                    ; Usage            ;
++---------------------------------------------+------------------+
+; Estimate of Logic utilization (ALMs needed) ; 1513             ;
+;                                             ;                  ;
+; Combinational ALUT usage for logic          ; 1640             ;
+;     -- 7 input functions                    ; 21               ;
+;     -- 6 input functions                    ; 1072             ;
+;     -- 5 input functions                    ; 190              ;
+;     -- 4 input functions                    ; 49               ;
+;     -- <=3 input functions                  ; 308              ;
+;                                             ;                  ;
+; Dedicated logic registers                   ; 1460             ;
+;                                             ;                  ;
+; I/O pins                                    ; 211              ;
+; Total MLAB memory bits                      ; 0                ;
+; Total block memory bits                     ; 2048             ;
+;                                             ;                  ;
+; Total DSP Blocks                            ; 0                ;
+;                                             ;                  ;
+; Maximum fan-out node                        ; slow_clock~input ;
+; Maximum fan-out                             ; 1492             ;
+; Total fan-out                               ; 14619            ;
+; Average fan-out                             ; 4.11             ;
++---------------------------------------------+------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                             ;
++-------------------------------------------+-------------------+--------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                        ; Library Name ;
++-------------------------------------------+-------------------+--------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+; |mips_processor                           ; 1640 (37)         ; 1460 (404)   ; 2048              ; 0          ; 211  ; 0            ; |mips_processor                                                                            ; work         ;
+;    |PC:pc_mips|                           ; 3 (3)             ; 32 (32)      ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|PC:pc_mips                                                                 ; work         ;
+;    |ROMVHDL:rom|                          ; 0 (0)             ; 0 (0)        ; 2048              ; 0          ; 0    ; 0            ; |mips_processor|ROMVHDL:rom                                                                ; work         ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)             ; 0 (0)        ; 2048              ; 0          ; 0    ; 0            ; |mips_processor|ROMVHDL:rom|altsyncram:altsyncram_component                                ; work         ;
+;          |altsyncram_up14:auto_generated| ; 0 (0)             ; 0 (0)        ; 2048              ; 0          ; 0    ; 0            ; |mips_processor|ROMVHDL:rom|altsyncram:altsyncram_component|altsyncram_up14:auto_generated ; work         ;
+;    |alu:alu_branch|                       ; 30 (30)           ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|alu:alu_branch                                                             ; work         ;
+;    |alu:alu_main|                         ; 641 (641)         ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|alu:alu_main                                                               ; work         ;
+;    |forwarding:forward|                   ; 110 (110)         ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|forwarding:forward                                                         ; work         ;
+;    |mips_control:control|                 ; 13 (13)           ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|mips_control:control                                                       ; work         ;
+;    |mux32:mux_jal|                        ; 32 (32)           ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|mux32:mux_jal                                                              ; work         ;
+;    |mux32:mux_jr|                         ; 33 (33)           ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|mux32:mux_jr                                                               ; work         ;
+;    |mux:mux_writeregister|                ; 5 (5)             ; 0 (0)        ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|mux:mux_writeregister                                                      ; work         ;
+;    |register_file:reg_file|               ; 736 (736)         ; 1024 (1024)  ; 0                 ; 0          ; 0    ; 0            ; |mips_processor|register_file:reg_file                                                     ; work         ;
++-------------------------------------------+-------------------+--------------+-------------------+------------+------+--------------+--------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                 ;
++---------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+---------+
+; Name                                                                                  ; Type ; Mode ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF     ;
++---------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+---------+
+; ROMVHDL:rom|altsyncram:altsyncram_component|altsyncram_up14:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; 64           ; 32           ; --           ; --           ; 2048 ; ROM.mif ;
++---------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+------+---------+
+
+
++----------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                ;
++-----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------+------------------------+
+; alu:alu_main|Result[0]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[1]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[2]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[3]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[4]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[5]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[6]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[7]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[8]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[9]                              ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[10]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[11]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[12]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[13]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[14]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[15]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[16]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[17]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[18]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[19]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[20]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[21]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[22]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[23]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[24]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[25]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[26]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[27]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[28]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[29]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[30]                             ; alu:alu_main|Mux32  ; yes                    ;
+; alu:alu_main|Result[31]                             ; alu:alu_main|Mux32  ; yes                    ;
+; Number of user-specified and inferred latches = 32  ;                     ;                        ;
++-----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; sjumpaddress_IDEX[0,1]                 ; Stuck at GND due to stuck port data_in ;
+; smemtoreg_IDEX                         ; Stuck at GND due to stuck port data_in ;
+; sjumpaddress_EXMEM[0,1]                ; Stuck at GND due to stuck port data_in ;
+; mux_one[1]~reg0                        ; Stuck at GND due to stuck port data_in ;
+; mux_one[0]~reg0                        ; Stuck at GND due to stuck port data_in ;
+; smemtoreg_EXMEM                        ; Stuck at GND due to stuck port data_in ;
+; smemtoreg_MEMWB                        ; Stuck at GND due to stuck port data_in ;
+; smemreaddata_MEMWB[0..31]              ; Lost fanout                            ;
+; smemwrite_EXMEM                        ; Lost fanout                            ;
+; smemwrite_IDEX                         ; Lost fanout                            ;
+; smemread_EXMEM                         ; Lost fanout                            ;
+; smemread_IDEX                          ; Lost fanout                            ;
+; spc_IDEX[31]                           ; Merged with sjumpaddress_EXMEM[31]     ;
+; spc_IDEX[30]                           ; Merged with sjumpaddress_EXMEM[30]     ;
+; spc_IDEX[29]                           ; Merged with sjumpaddress_EXMEM[29]     ;
+; spc_IDEX[28]                           ; Merged with sjumpaddress_EXMEM[28]     ;
+; sreadreg1_IDEX[4]                      ; Merged with sjumpaddress_IDEX[27]      ;
+; spc_IFID[31]                           ; Merged with sjumpaddress_IDEX[31]      ;
+; spc_IFID[30]                           ; Merged with sjumpaddress_IDEX[30]      ;
+; spc_IFID[29]                           ; Merged with sjumpaddress_IDEX[29]      ;
+; spc_IFID[28]                           ; Merged with sjumpaddress_IDEX[28]      ;
+; sreadreg2_IDEX[0]                      ; Merged with sjumpaddress_IDEX[18]      ;
+; sreadreg2_IDEX[1]                      ; Merged with sjumpaddress_IDEX[19]      ;
+; sreadreg2_IDEX[2]                      ; Merged with sjumpaddress_IDEX[20]      ;
+; sreadreg2_IDEX[3]                      ; Merged with sjumpaddress_IDEX[21]      ;
+; sreadreg2_IDEX[4]                      ; Merged with sjumpaddress_IDEX[22]      ;
+; sreadreg1_IDEX[0]                      ; Merged with sjumpaddress_IDEX[23]      ;
+; sreadreg1_IDEX[1]                      ; Merged with sjumpaddress_IDEX[24]      ;
+; sreadreg1_IDEX[2]                      ; Merged with sjumpaddress_IDEX[25]      ;
+; sreadreg1_IDEX[3]                      ; Merged with sjumpaddress_IDEX[26]      ;
+; Total Number of Removed Registers = 63 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                          ;
++----------------------+---------------------------+-----------------------------------------------------------------------------------+
+; Register name        ; Reason for Removal        ; Registers Removed due to This Register                                            ;
++----------------------+---------------------------+-----------------------------------------------------------------------------------+
+; smemtoreg_IDEX       ; Stuck at GND              ; smemtoreg_EXMEM, smemtoreg_MEMWB, smemreaddata_MEMWB[31], smemreaddata_MEMWB[30], ;
+;                      ; due to stuck port data_in ; smemreaddata_MEMWB[29], smemreaddata_MEMWB[28], smemreaddata_MEMWB[26],           ;
+;                      ;                           ; smemreaddata_MEMWB[25], smemreaddata_MEMWB[24], smemreaddata_MEMWB[23],           ;
+;                      ;                           ; smemreaddata_MEMWB[22], smemreaddata_MEMWB[21], smemreaddata_MEMWB[20],           ;
+;                      ;                           ; smemreaddata_MEMWB[19], smemreaddata_MEMWB[18], smemreaddata_MEMWB[17],           ;
+;                      ;                           ; smemreaddata_MEMWB[16], smemreaddata_MEMWB[15], smemreaddata_MEMWB[14],           ;
+;                      ;                           ; smemreaddata_MEMWB[13], smemreaddata_MEMWB[12], smemreaddata_MEMWB[11],           ;
+;                      ;                           ; smemreaddata_MEMWB[10], smemreaddata_MEMWB[9], smemreaddata_MEMWB[8],             ;
+;                      ;                           ; smemreaddata_MEMWB[7], smemreaddata_MEMWB[6], smemreaddata_MEMWB[5],              ;
+;                      ;                           ; smemreaddata_MEMWB[4], smemreaddata_MEMWB[3], smemreaddata_MEMWB[2],              ;
+;                      ;                           ; smemreaddata_MEMWB[1], smemreaddata_MEMWB[0], smemwrite_EXMEM, smemwrite_IDEX,    ;
+;                      ;                           ; smemread_EXMEM, smemread_IDEX                                                     ;
+; sjumpaddress_IDEX[0] ; Stuck at GND              ; sjumpaddress_EXMEM[0], mux_one[0]~reg0                                            ;
+;                      ; due to stuck port data_in ;                                                                                   ;
+; sjumpaddress_IDEX[1] ; Stuck at GND              ; sjumpaddress_EXMEM[1], mux_one[1]~reg0                                            ;
+;                      ; due to stuck port data_in ;                                                                                   ;
++----------------------+---------------------------+-----------------------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 1460  ;
+; Number of registers using Synchronous Clear  ; 371   ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 1056  ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 1057  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; PC:pc_mips|pc_output[22]               ; 1       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------+
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |mips_processor|PC:pc_mips|pc_output[0]         ;
+; 4:1                ; 29 bits   ; 58 LEs        ; 58 LEs               ; 0 LEs                  ; Yes        ; |mips_processor|PC:pc_mips|pc_output[24]        ;
+; 66:1               ; 2 bits    ; 88 LEs        ; 22 LEs               ; 66 LEs                 ; Yes        ; |mips_processor|salucontrol_IDEX[1]             ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftRight0        ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftLeft0         ;
+; 4:1                ; 50 bits   ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftLeft0         ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftRight0        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftLeft0         ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftRight0        ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |mips_processor|forwarding:forward|Mux18        ;
+; 4:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; No         ; |mips_processor|forwarding:forward|Mux32        ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftRight1        ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftLeft1         ;
+; 4:1                ; 50 bits   ; 100 LEs       ; 100 LEs              ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftRight1        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftRight1        ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftLeft1         ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; No         ; |mips_processor|alu:alu_main|ShiftRight1        ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; No         ; |mips_processor|mux:mux_writeregister|output[0] ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |mips_processor|register_file:reg_file|Mux48    ;
+; 32:1               ; 32 bits   ; 672 LEs       ; 672 LEs              ; 0 LEs                  ; No         ; |mips_processor|register_file:reg_file|Mux5     ;
+; 23:1               ; 12 bits   ; 180 LEs       ; 168 LEs              ; 12 LEs                 ; No         ; |mips_processor|alu:alu_main|Mux25              ;
+; 23:1               ; 12 bits   ; 180 LEs       ; 168 LEs              ; 12 LEs                 ; No         ; |mips_processor|alu:alu_main|Mux5               ;
+; 29:1               ; 4 bits    ; 76 LEs        ; 60 LEs               ; 16 LEs                 ; No         ; |mips_processor|alu:alu_main|Mux31              ;
+; 29:1               ; 3 bits    ; 57 LEs        ; 48 LEs               ; 9 LEs                  ; No         ; |mips_processor|alu:alu_main|Mux3               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------+
+; Source assignments for ROMVHDL:rom|altsyncram:altsyncram_component|altsyncram_up14:auto_generated ;
++---------------------------------+--------------------+------+-------------------------------------+
+; Assignment                      ; Value              ; From ; To                                  ;
++---------------------------------+--------------------+------+-------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                   ;
++---------------------------------+--------------------+------+-------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------+
+; Source assignments for RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated ;
++---------------------------------+--------------------+------+---------------------------------+
+; Assignment                      ; Value              ; From ; To                              ;
++---------------------------------+--------------------+------+---------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                               ;
++---------------------------------+--------------------+------+---------------------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: ROMVHDL:rom|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+------------------------------+
+; Parameter Name                     ; Value                ; Type                         ;
++------------------------------------+----------------------+------------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                      ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                   ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                 ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                 ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE               ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                      ;
+; OPERATION_MODE                     ; ROM                  ; Untyped                      ;
+; WIDTH_A                            ; 32                   ; Signed Integer               ;
+; WIDTHAD_A                          ; 6                    ; Signed Integer               ;
+; NUMWORDS_A                         ; 64                   ; Signed Integer               ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                      ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                      ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                      ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                      ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                      ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                      ;
+; WIDTH_B                            ; 1                    ; Signed Integer               ;
+; WIDTHAD_B                          ; 1                    ; Signed Integer               ;
+; NUMWORDS_B                         ; 0                    ; Signed Integer               ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                      ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                      ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                      ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                      ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                      ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                      ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                      ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                      ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                      ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                      ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                      ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                      ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer               ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Signed Integer               ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                      ;
+; BYTE_SIZE                          ; 8                    ; Signed Integer               ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                      ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                      ;
+; INIT_FILE                          ; ROM.mif              ; Untyped                      ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                      ;
+; MAXIMUM_DEPTH                      ; 0                    ; Signed Integer               ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                      ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                      ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                      ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                      ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                      ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                      ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                      ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Signed Integer               ;
+; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                      ;
+; CBXI_PARAMETER                     ; altsyncram_up14      ; Untyped                      ;
++------------------------------------+----------------------+------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: RAM:mem|altsyncram:altsyncram_component ;
++------------------------------------+----------------------+--------------------------+
+; Parameter Name                     ; Value                ; Type                     ;
++------------------------------------+----------------------+--------------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                  ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY               ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY             ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE             ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE           ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped                  ;
+; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                  ;
+; WIDTH_A                            ; 32                   ; Signed Integer           ;
+; WIDTHAD_A                          ; 6                    ; Signed Integer           ;
+; NUMWORDS_A                         ; 64                   ; Signed Integer           ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                  ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                  ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                  ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                  ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped                  ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                  ;
+; WIDTH_B                            ; 1                    ; Signed Integer           ;
+; WIDTHAD_B                          ; 1                    ; Signed Integer           ;
+; NUMWORDS_B                         ; 0                    ; Signed Integer           ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped                  ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                  ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                  ;
+; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                  ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                  ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                  ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped                  ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                  ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                  ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                  ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                  ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                  ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer           ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Signed Integer           ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                  ;
+; BYTE_SIZE                          ; 8                    ; Signed Integer           ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                  ;
+; READ_DURING_WRITE_MODE_PORT_A      ; DONT_CARE            ; Untyped                  ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                  ;
+; INIT_FILE                          ; UNUSED               ; Untyped                  ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                  ;
+; MAXIMUM_DEPTH                      ; 0                    ; Signed Integer           ;
+; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                  ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                  ;
+; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                  ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                  ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                  ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                  ;
+; ENABLE_ECC                         ; FALSE                ; Untyped                  ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                  ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Signed Integer           ;
+; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                  ;
+; CBXI_PARAMETER                     ; altsyncram_imv3      ; Untyped                  ;
++------------------------------------+----------------------+--------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                        ;
++-------------------------------------------+---------------------------------------------+
+; Name                                      ; Value                                       ;
++-------------------------------------------+---------------------------------------------+
+; Number of entity instances                ; 2                                           ;
+; Entity Instance                           ; ROMVHDL:rom|altsyncram:altsyncram_component ;
+;     -- OPERATION_MODE                     ; ROM                                         ;
+;     -- WIDTH_A                            ; 32                                          ;
+;     -- NUMWORDS_A                         ; 64                                          ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                ;
+;     -- WIDTH_B                            ; 1                                           ;
+;     -- NUMWORDS_B                         ; 0                                           ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                      ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                        ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                   ;
+; Entity Instance                           ; RAM:mem|altsyncram:altsyncram_component     ;
+;     -- OPERATION_MODE                     ; SINGLE_PORT                                 ;
+;     -- WIDTH_A                            ; 32                                          ;
+;     -- NUMWORDS_A                         ; 64                                          ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                                ;
+;     -- WIDTH_B                            ; 1                                           ;
+;     -- NUMWORDS_B                         ; 0                                           ;
+;     -- ADDRESS_REG_B                      ; CLOCK1                                      ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                                ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                                        ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                   ;
++-------------------------------------------+---------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "alu:alu_branch"                                                                                 ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; alucontrol[3..2] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; alucontrol[1]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; alucontrol[0]    ; Input  ; Info     ; Stuck at GND                                                                        ;
+; inputb[1..0]     ; Input  ; Info     ; Stuck at GND                                                                        ;
+; shamt            ; Input  ; Info     ; Stuck at GND                                                                        ;
+; zero             ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++---------------------------------------------------+
+; Port Connectivity Checks: "mux:mux_writeregister" ;
++--------+-------+----------+-----------------------+
+; Port   ; Type  ; Severity ; Details               ;
++--------+-------+----------+-----------------------+
+; input1 ; Input ; Info     ; Stuck at VCC          ;
++--------+-------+----------+-----------------------+
+
+
++------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "mux32:mux_alu"                                                                        ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; Port   ; Type   ; Severity ; Details                                                                             ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+; output ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++--------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 1460                        ;
+;     CLR               ; 30                          ;
+;     ENA               ; 31                          ;
+;     ENA CLR           ; 1026                        ;
+;     SCLR              ; 371                         ;
+;     plain             ; 2                           ;
+; arriav_lcell_comb     ; 1641                        ;
+;     arith             ; 93                          ;
+;         1 data inputs ; 41                          ;
+;         2 data inputs ; 20                          ;
+;         5 data inputs ; 32                          ;
+;     extend            ; 21                          ;
+;         7 data inputs ; 21                          ;
+;     normal            ; 1527                        ;
+;         0 data inputs ; 1                           ;
+;         2 data inputs ; 63                          ;
+;         3 data inputs ; 184                         ;
+;         4 data inputs ; 49                          ;
+;         5 data inputs ; 158                         ;
+;         6 data inputs ; 1072                        ;
+; boundary_port         ; 211                         ;
+; stratixv_ram_block    ; 32                          ;
+;                       ;                             ;
+; Max LUT depth         ; 11.00                       ;
+; Average LUT depth     ; 4.42                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:07     ;
++----------------+--------------+
 
 
 +-------------------------------+
@@ -157,55 +682,368 @@ Parallel compilation was disabled, but you have multiple processors available. E
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Thu May 02 17:34:46 2019
+    Info: Processing started: Fri May 03 00:25:12 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Lab -c Lab
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file forwarding.vhd
-    Info (12022): Found design unit 1: forwarding-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/forwarding.vhd Line: 28
-    Info (12023): Found entity 1: forwarding File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/forwarding.vhd Line: 6
+    Info (12022): Found design unit 1: forwarding-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/forwarding.vhd Line: 28
+    Info (12023): Found entity 1: forwarding File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/forwarding.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file romvhdl.vhd
-    Info (12022): Found design unit 1: romvhdl-SYN File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/ROMVHDL.vhd Line: 53
-    Info (12023): Found entity 1: ROMVHDL File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/ROMVHDL.vhd Line: 43
+    Info (12022): Found design unit 1: romvhdl-SYN File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROMVHDL.vhd Line: 53
+    Info (12023): Found entity 1: ROMVHDL File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROMVHDL.vhd Line: 43
 Info (12021): Found 2 design units, including 1 entities, in source file ram.vhd
-    Info (12022): Found design unit 1: ram-SYN File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/RAM.vhd Line: 56
-    Info (12023): Found entity 1: RAM File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/RAM.vhd Line: 43
+    Info (12022): Found design unit 1: ram-SYN File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/RAM.vhd Line: 56
+    Info (12023): Found entity 1: RAM File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/RAM.vhd Line: 43
 Info (12021): Found 2 design units, including 1 entities, in source file signextend.vhd
-    Info (12022): Found design unit 1: signextend-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/signextend.vhd Line: 12
-    Info (12023): Found entity 1: signextend File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/signextend.vhd Line: 6
+    Info (12022): Found design unit 1: signextend-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/signextend.vhd Line: 12
+    Info (12023): Found entity 1: signextend File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/signextend.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file register_file.vhd
-    Info (12022): Found design unit 1: register_file-arch File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/register_file.vhd Line: 14
-    Info (12023): Found entity 1: register_file File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/register_file.vhd Line: 6
+    Info (12022): Found design unit 1: register_file-arch File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/register_file.vhd Line: 14
+    Info (12023): Found entity 1: register_file File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/register_file.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file pc.vhd
-    Info (12022): Found design unit 1: PC-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/pc.vhd Line: 12
-    Info (12023): Found entity 1: PC File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/pc.vhd Line: 4
+    Info (12022): Found design unit 1: PC-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/pc.vhd Line: 12
+    Info (12023): Found entity 1: PC File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/pc.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file orgate.vhd
-    Info (12022): Found design unit 1: orgate-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/orgate.vhd Line: 10
-    Info (12023): Found entity 1: orgate File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/orgate.vhd Line: 4
-Warning (12090): Entity "mux" obtained from "mux.vhd" instead of from Quartus Prime megafunction library File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/mux.vhd Line: 6
+    Info (12022): Found design unit 1: orgate-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/orgate.vhd Line: 10
+    Info (12023): Found entity 1: orgate File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/orgate.vhd Line: 4
+Warning (12090): Entity "mux" obtained from "mux.vhd" instead of from Quartus Prime megafunction library File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mux.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file mux.vhd
-    Info (12022): Found design unit 1: mux-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/mux.vhd Line: 12
-    Info (12023): Found entity 1: mux File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/mux.vhd Line: 6
+    Info (12022): Found design unit 1: mux-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mux.vhd Line: 12
+    Info (12023): Found entity 1: mux File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mux.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file mips_processor.vhd
-    Info (12022): Found design unit 1: mips_processor-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/mips_processor.vhd Line: 21
-    Info (12023): Found entity 1: mips_processor File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/mips_processor.vhd Line: 6
+    Info (12022): Found design unit 1: mips_processor-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 21
+    Info (12023): Found entity 1: mips_processor File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 6
 Info (12021): Found 2 design units, including 1 entities, in source file mips_control.vhd
-    Info (12022): Found design unit 1: mips_control-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/mips_control.vhd Line: 15
-    Info (12023): Found entity 1: mips_control File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/mips_control.vhd Line: 4
+    Info (12022): Found design unit 1: mips_control-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_control.vhd Line: 15
+    Info (12023): Found entity 1: mips_control File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_control.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file max32.vhd
-    Info (12022): Found design unit 1: mux32-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/max32.vhd Line: 12
-    Info (12023): Found entity 1: mux32 File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/max32.vhd Line: 6
+    Info (12022): Found design unit 1: mux32-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/max32.vhd Line: 12
+    Info (12023): Found entity 1: mux32 File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/max32.vhd Line: 6
 Info (12021): Found 0 design units, including 0 entities, in source file lab.vhd
 Info (12021): Found 2 design units, including 1 entities, in source file and.vhd
-    Info (12022): Found design unit 1: andgate-behavior File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/and.vhd Line: 10
-    Info (12023): Found entity 1: andgate File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/and.vhd Line: 4
+    Info (12022): Found design unit 1: andgate-behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/and.vhd Line: 10
+    Info (12023): Found entity 1: andgate File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/and.vhd Line: 4
 Info (12021): Found 2 design units, including 1 entities, in source file alu.vhd
-    Info (12022): Found design unit 1: alu-arch File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/alu.vhd Line: 15
-    Info (12023): Found entity 1: alu File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/alu.vhd Line: 7
-Error (10327): VHDL error at forwarding.vhd(76): can't determine definition of operator ""="" -- found 0 possible definitions File: C:/intelFPGA_lite/18.1/Quartus Projects/MipsProcessor/forwarding.vhd Line: 76
-Error: Quartus Prime Analysis & Synthesis was unsuccessful. 1 error, 2 warnings
-    Error: Peak virtual memory: 5030 megabytes
-    Error: Processing ended: Thu May 02 17:34:53 2019
-    Error: Elapsed time: 00:00:07
-    Error: Total CPU time (on all processors): 00:00:16
+    Info (12022): Found design unit 1: alu-arch File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 15
+    Info (12023): Found entity 1: alu File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 7
+Info (12127): Elaborating entity "mips_processor" for the top level hierarchy
+Warning (10036): Verilog HDL or VHDL warning at mips_processor.vhd(24): object "sreaddata2_EXMEM" assigned a value but never read File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 24
+Warning (10036): Verilog HDL or VHDL warning at mips_processor.vhd(24): object "alu_oper2" assigned a value but never read File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 24
+Warning (10036): Verilog HDL or VHDL warning at mips_processor.vhd(26): object "salumainresult_MEMWB" assigned a value but never read File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 26
+Warning (10036): Verilog HDL or VHDL warning at mips_processor.vhd(29): object "sregdest_EXMEM" assigned a value but never read File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 29
+Warning (10036): Verilog HDL or VHDL warning at mips_processor.vhd(36): object "sreadreg1_MEMWB" assigned a value but never read File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 36
+Warning (10036): Verilog HDL or VHDL warning at mips_processor.vhd(36): object "sreadreg2_MEMWB" assigned a value but never read File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 36
+Warning (10492): VHDL Process Statement warning at mips_processor.vhd(159): signal "pc_counter_input" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 159
+Warning (10492): VHDL Process Statement warning at mips_processor.vhd(165): signal "pc_counter_input" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 165
+Info (12128): Elaborating entity "PC" for hierarchy "PC:pc_mips" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 372
+Info (12128): Elaborating entity "ROMVHDL" for hierarchy "ROMVHDL:rom" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 378
+Info (12128): Elaborating entity "altsyncram" for hierarchy "ROMVHDL:rom|altsyncram:altsyncram_component" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROMVHDL.vhd Line: 60
+Info (12130): Elaborated megafunction instantiation "ROMVHDL:rom|altsyncram:altsyncram_component" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROMVHDL.vhd Line: 60
+Info (12133): Instantiated megafunction "ROMVHDL:rom|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROMVHDL.vhd Line: 60
+    Info (12134): Parameter "address_aclr_a" = "NONE"
+    Info (12134): Parameter "address_aclr_b" = "NONE"
+    Info (12134): Parameter "address_reg_b" = "CLOCK1"
+    Info (12134): Parameter "byte_size" = "8"
+    Info (12134): Parameter "byteena_aclr_a" = "UNUSED"
+    Info (12134): Parameter "byteena_aclr_b" = "NONE"
+    Info (12134): Parameter "byteena_reg_b" = "CLOCK1"
+    Info (12134): Parameter "clock_enable_core_a" = "USE_INPUT_CLKEN"
+    Info (12134): Parameter "clock_enable_core_b" = "USE_INPUT_CLKEN"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_input_b" = "NORMAL"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_b" = "NORMAL"
+    Info (12134): Parameter "intended_device_family" = "Cyclone V"
+    Info (12134): Parameter "ecc_pipeline_stage_enabled" = "FALSE"
+    Info (12134): Parameter "enable_ecc" = "FALSE"
+    Info (12134): Parameter "implement_in_les" = "OFF"
+    Info (12134): Parameter "indata_aclr_a" = "UNUSED"
+    Info (12134): Parameter "indata_aclr_b" = "NONE"
+    Info (12134): Parameter "indata_reg_b" = "CLOCK1"
+    Info (12134): Parameter "init_file" = "ROM.mif"
+    Info (12134): Parameter "init_file_layout" = "PORT_A"
+    Info (12134): Parameter "maximum_depth" = "0"
+    Info (12134): Parameter "numwords_a" = "64"
+    Info (12134): Parameter "numwords_b" = "0"
+    Info (12134): Parameter "operation_mode" = "ROM"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_aclr_b" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "outdata_reg_b" = "UNREGISTERED"
+    Info (12134): Parameter "power_up_uninitialized" = "FALSE"
+    Info (12134): Parameter "ram_block_type" = "AUTO"
+    Info (12134): Parameter "rdcontrol_aclr_b" = "NONE"
+    Info (12134): Parameter "rdcontrol_reg_b" = "CLOCK1"
+    Info (12134): Parameter "read_during_write_mode_mixed_ports" = "DONT_CARE"
+    Info (12134): Parameter "read_during_write_mode_port_a" = "NEW_DATA_NO_NBE_READ"
+    Info (12134): Parameter "read_during_write_mode_port_b" = "NEW_DATA_NO_NBE_READ"
+    Info (12134): Parameter "stratixiv_m144k_allow_dual_clocks" = "ON"
+    Info (12134): Parameter "width_a" = "32"
+    Info (12134): Parameter "width_b" = "1"
+    Info (12134): Parameter "width_byteena_a" = "1"
+    Info (12134): Parameter "width_byteena_b" = "1"
+    Info (12134): Parameter "width_eccstatus" = "3"
+    Info (12134): Parameter "widthad_a" = "6"
+    Info (12134): Parameter "widthad_b" = "1"
+    Info (12134): Parameter "wrcontrol_aclr_a" = "UNUSED"
+    Info (12134): Parameter "wrcontrol_aclr_b" = "NONE"
+    Info (12134): Parameter "wrcontrol_wraddress_reg_b" = "CLOCK1"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_up14.tdf
+    Info (12023): Found entity 1: altsyncram_up14 File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_up14.tdf Line: 28
+Info (12128): Elaborating entity "altsyncram_up14" for hierarchy "ROMVHDL:rom|altsyncram:altsyncram_component|altsyncram_up14:auto_generated" File: c:/altera_lite/15.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Critical Warning (127005): Memory depth (64) in the design file differs from memory depth (6) in the Memory Initialization File "C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROM.mif" -- setting initial value for remaining addresses to 0 File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROMVHDL.vhd Line: 60
+Info (12128): Elaborating entity "mips_control" for hierarchy "mips_control:control" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 382
+Warning (10492): VHDL Process Statement warning at mips_control.vhd(62): signal "R_type" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_control.vhd Line: 62
+Info (12128): Elaborating entity "register_file" for hierarchy "register_file:reg_file" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 392
+Info (12128): Elaborating entity "mux" for hierarchy "mux:mux_reg_file" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 398
+Info (12128): Elaborating entity "mux32" for hierarchy "mux32:mux_alu" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 402
+Info (12128): Elaborating entity "signextend" for hierarchy "signextend:sign_extend" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 434
+Info (12128): Elaborating entity "alu" for hierarchy "alu:alu_main" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 438
+Warning (10492): VHDL Process Statement warning at alu.vhd(53): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 53
+Warning (10492): VHDL Process Statement warning at alu.vhd(59): signal "Result" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 59
+Warning (10631): VHDL Process Statement warning at alu.vhd(19): inferring latch(es) for signal or variable "Result", which holds its previous value in one or more paths through the process File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[0]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[1]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[2]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[3]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[4]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[5]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[6]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[7]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[8]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[9]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[10]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[11]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[12]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[13]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[14]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[15]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[16]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[17]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[18]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[19]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[20]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[21]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[22]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[23]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[24]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[25]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[26]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[27]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[28]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[29]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[30]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (10041): Inferred latch for "Result[31]" at alu.vhd(19) File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Info (12128): Elaborating entity "RAM" for hierarchy "RAM:mem" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 449
+Info (12128): Elaborating entity "altsyncram" for hierarchy "RAM:mem|altsyncram:altsyncram_component" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/RAM.vhd Line: 63
+Info (12130): Elaborated megafunction instantiation "RAM:mem|altsyncram:altsyncram_component" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/RAM.vhd Line: 63
+Info (12133): Instantiated megafunction "RAM:mem|altsyncram:altsyncram_component" with the following parameter: File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/RAM.vhd Line: 63
+    Info (12134): Parameter "address_aclr_a" = "UNUSED"
+    Info (12134): Parameter "address_aclr_b" = "NONE"
+    Info (12134): Parameter "address_reg_b" = "CLOCK1"
+    Info (12134): Parameter "byte_size" = "8"
+    Info (12134): Parameter "byteena_aclr_a" = "UNUSED"
+    Info (12134): Parameter "byteena_aclr_b" = "NONE"
+    Info (12134): Parameter "byteena_reg_b" = "CLOCK1"
+    Info (12134): Parameter "clock_enable_core_a" = "USE_INPUT_CLKEN"
+    Info (12134): Parameter "clock_enable_core_b" = "USE_INPUT_CLKEN"
+    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_input_b" = "NORMAL"
+    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
+    Info (12134): Parameter "clock_enable_output_b" = "NORMAL"
+    Info (12134): Parameter "intended_device_family" = "Cyclone V"
+    Info (12134): Parameter "ecc_pipeline_stage_enabled" = "FALSE"
+    Info (12134): Parameter "enable_ecc" = "FALSE"
+    Info (12134): Parameter "implement_in_les" = "OFF"
+    Info (12134): Parameter "indata_aclr_a" = "UNUSED"
+    Info (12134): Parameter "indata_aclr_b" = "NONE"
+    Info (12134): Parameter "indata_reg_b" = "CLOCK1"
+    Info (12134): Parameter "init_file" = "UNUSED"
+    Info (12134): Parameter "init_file_layout" = "PORT_A"
+    Info (12134): Parameter "maximum_depth" = "0"
+    Info (12134): Parameter "numwords_a" = "64"
+    Info (12134): Parameter "numwords_b" = "0"
+    Info (12134): Parameter "operation_mode" = "SINGLE_PORT"
+    Info (12134): Parameter "outdata_aclr_a" = "NONE"
+    Info (12134): Parameter "outdata_aclr_b" = "NONE"
+    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
+    Info (12134): Parameter "outdata_reg_b" = "UNREGISTERED"
+    Info (12134): Parameter "power_up_uninitialized" = "FALSE"
+    Info (12134): Parameter "ram_block_type" = "AUTO"
+    Info (12134): Parameter "rdcontrol_aclr_b" = "NONE"
+    Info (12134): Parameter "rdcontrol_reg_b" = "CLOCK1"
+    Info (12134): Parameter "read_during_write_mode_mixed_ports" = "DONT_CARE"
+    Info (12134): Parameter "read_during_write_mode_port_a" = "DONT_CARE"
+    Info (12134): Parameter "read_during_write_mode_port_b" = "NEW_DATA_NO_NBE_READ"
+    Info (12134): Parameter "stratixiv_m144k_allow_dual_clocks" = "ON"
+    Info (12134): Parameter "width_a" = "32"
+    Info (12134): Parameter "width_b" = "1"
+    Info (12134): Parameter "width_byteena_a" = "1"
+    Info (12134): Parameter "width_byteena_b" = "1"
+    Info (12134): Parameter "width_eccstatus" = "3"
+    Info (12134): Parameter "widthad_a" = "6"
+    Info (12134): Parameter "widthad_b" = "1"
+    Info (12134): Parameter "wrcontrol_aclr_a" = "UNUSED"
+    Info (12134): Parameter "wrcontrol_aclr_b" = "NONE"
+    Info (12134): Parameter "wrcontrol_wraddress_reg_b" = "CLOCK1"
+    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
+    Info (12134): Parameter "lpm_type" = "altsyncram"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_imv3.tdf
+    Info (12023): Found entity 1: altsyncram_imv3 File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 28
+Info (12128): Elaborating entity "altsyncram_imv3" for hierarchy "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated" File: c:/altera_lite/15.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 792
+Info (12128): Elaborating entity "andgate" for hierarchy "andgate:bne_and" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 454
+Info (12128): Elaborating entity "orgate" for hierarchy "orgate:branch" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 460
+Info (12128): Elaborating entity "forwarding" for hierarchy "forwarding:forward" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 466
+Warning (14026): LATCH primitive "alu:alu_branch|Result[0]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[1]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[2]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[3]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[4]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[5]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[6]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[7]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[8]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[9]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[10]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[11]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[12]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[13]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[14]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[15]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[16]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[17]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[18]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[19]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[20]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[21]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[22]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[23]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[24]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[25]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[26]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[27]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[28]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[29]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[30]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14026): LATCH primitive "alu:alu_branch|Result[31]" is permanently enabled File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+Warning (14284): Synthesized away the following node(s):
+    Warning (14285): Synthesized away the following RAM node(s):
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[0]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 38
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[1]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 60
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[2]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 82
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[3]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 104
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[4]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 126
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[5]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 148
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[6]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 170
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[7]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 192
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[8]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 214
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[9]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 236
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[10]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 258
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[11]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 280
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[12]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 302
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[13]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 324
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[14]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 346
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[15]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 368
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[16]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 390
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[17]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 412
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[18]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 434
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[19]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 456
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[20]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 478
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[21]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 500
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[22]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 522
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[23]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 544
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[24]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 566
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[25]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 588
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[26]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 610
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[27]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 632
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[28]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 654
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[29]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 676
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[30]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 698
+        Warning (14320): Synthesized away node "RAM:mem|altsyncram:altsyncram_component|altsyncram_imv3:auto_generated|q_a[31]" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/db/altsyncram_imv3.tdf Line: 720
+Warning (13012): Latch alu:alu_main|Result[0] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[1] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[2] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[3] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[4] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[5] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[6] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[7] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[8] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[9] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[10] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[11] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[12] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[13] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[14] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[15] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[0] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[16] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[17] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[18] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[19] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[20] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[21] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[22] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[23] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[24] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[25] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[26] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[27] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[2] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[28] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[3] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[29] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[3] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[30] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[3] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13012): Latch alu:alu_main|Result[31] has unsafe behavior File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/alu.vhd Line: 19
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal salucontrol_IDEX[3] File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 206
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "mux_one[0]" is stuck at GND File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 268
+    Warning (13410): Pin "mux_one[1]" is stuck at GND File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 268
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 36 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "fast_clock" File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/mips_processor.vhd Line: 9
+Info (21057): Implemented 3301 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 208 output pins
+    Info (21061): Implemented 3058 logic cells
+    Info (21064): Implemented 32 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 150 warnings
+    Info: Peak virtual memory: 5075 megabytes
+    Info: Processing ended: Fri May 03 00:25:34 2019
+    Info: Elapsed time: 00:00:22
+    Info: Total CPU time (on all processors): 00:00:36
 
 
