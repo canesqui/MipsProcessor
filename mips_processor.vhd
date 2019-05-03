@@ -26,7 +26,7 @@ SIGNAL temp_calc, mux_branch_input1, mux_jump_input0, mux_pc_input, alu_branch_i
 SIGNAL alu_result_internal, salumainresult_EXMEM, salumainresult_MEMWB, alu_memory_result, mux_memory_input1, smemreaddata_MEMWB, write_data_input : STD_LOGIC_VECTOR (31 DOWNTO 0);
 SIGNAL jump_address, sjumpaddress_IDEX, sjumpaddress_EXMEM, mux_jump_output : STD_LOGIC_VECTOR (31 DOWNTO 0);
 
-SIGNAL sregwrite_IDEX, sregwrite_EXMEM, sregwrite_MEMWB, regwrite_signal, sregdest_IDEX, sregdest_EXMEM, sregdest_MEMWB : STD_LOGIC; 
+SIGNAL sregwrite_IDEX, 			, sregwrite_MEMWB, regwrite_signal, sregdest_IDEX, sregdest_EXMEM, sregdest_MEMWB : STD_LOGIC; 
 SIGNAL regdest, alu_src, salusrc_IDEX, mem_to_reg, smemtoreg_IDEX, smemtoreg_EXMEM : STD_LOGIC;
 SIGNAL smemtoreg_MEMWB, bne_control, sbne_IDEX, sbne_EXMEM, beq_control, sbeq_IDEX : STD_LOGIC;
 SIGNAL sbeq_EXMEM,alu_zero, sjal_IDEX, sjal_EXMEM, sjal_MEMWB, jal_control, jr_control, sjr_IDEX, sjr_EXMEM : STD_LOGIC; 
@@ -266,7 +266,7 @@ BEGIN
 		IF (reset_stages = '1') THEN						
 			spc_EXMEM <= x"00000000";		
 			--MIPS_CONTROL
-			sregwrite_EXMEM <= '0';
+						<= '0';
 			smemread_EXMEM <= '0';
 			smemwrite_EXMEM <= '0';
 			smemtoreg_EXMEM <= '0';
@@ -286,7 +286,7 @@ BEGIN
 		ELSE
 			spc_EXMEM <= spc_IDEX;		
 			--MIPS_CONTROL
-			sregwrite_EXMEM <= sregwrite_IDEX;
+						<= sregwrite_IDEX;
 			smemread_EXMEM <= smemread_IDEX;
 			smemwrite_EXMEM <= smemwrite_IDEX;
 			smemtoreg_EXMEM <= smemtoreg_IDEX;
@@ -331,7 +331,7 @@ BEGIN
 		ELSE
 			spc_MEMWB <= spc_EXMEM;	
 			--MIPS_CONTROL
-			sregwrite_MEMWB <= sregwrite_EXMEM;	
+			sregwrite_MEMWB <= 			;	
 			smemtoreg_MEMWB <= smemtoreg_EXMEM;
 			sjal_MEMWB <= sjal_EXMEM;				
 			--ALU Main
@@ -450,10 +450,10 @@ beq_and : andgate PORT MAP ( inputA => sbeq_EXMEM, inputB => alu_zero, output =>
 branch : orgate PORT MAP ( inputA => branch_bne_input, inputB => branch_beq_input, output => mux_branch_sel
 								  );									
 								  							  
---sregwrite_MEMWB <= sregwrite_EXMEM;	
+--sregwrite_MEMWB <= 			;	
 
 							  
-forward : forwarding PORT MAP ( fRegwrite_EXMEM 		=> sregwrite_EXMEM, 
+forward : forwarding PORT MAP ( fRegwrite_EXMEM 		=> 			, 
 										  fRegwrite_MEMWB 		=> sregwrite_MEMWB, 
 										  fRead_data1_in 			=> sreaddata1_IDEX, 
 										  fRead_data2_in 			=> sreaddata2_IDEX,
