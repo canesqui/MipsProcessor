@@ -3,99 +3,99 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow 1100mV 85C Model Setup 'salucontrol_IDEX[0]'
-Slack : -14.750
-TNS   : -438.561
+Slack : -18.319
+TNS   : -451.848
 
 Type  : Slow 1100mV 85C Model Setup 'slow_clock'
-Slack : -7.874
-TNS   : -8565.932
+Slack : -7.790
+TNS   : -8063.766
 
 Type  : Slow 1100mV 85C Model Hold 'slow_clock'
-Slack : -1.016
-TNS   : -1.016
+Slack : -2.380
+TNS   : -2.380
 
 Type  : Slow 1100mV 85C Model Hold 'salucontrol_IDEX[0]'
-Slack : 0.327
+Slack : 0.015
 TNS   : 0.000
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'slow_clock'
 Slack : -3.166
-TNS   : -2015.714
+TNS   : -2052.995
 
 Type  : Slow 1100mV 85C Model Minimum Pulse Width 'salucontrol_IDEX[0]'
-Slack : 0.092
+Slack : 0.127
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Setup 'salucontrol_IDEX[0]'
-Slack : -14.731
-TNS   : -438.826
+Slack : -18.448
+TNS   : -460.259
 
 Type  : Slow 1100mV 0C Model Setup 'slow_clock'
-Slack : -7.902
-TNS   : -8366.031
+Slack : -8.034
+TNS   : -7782.992
 
 Type  : Slow 1100mV 0C Model Hold 'slow_clock'
-Slack : -1.124
-TNS   : -1.124
+Slack : -2.635
+TNS   : -2.635
 
 Type  : Slow 1100mV 0C Model Hold 'salucontrol_IDEX[0]'
-Slack : 0.051
+Slack : 0.133
 TNS   : 0.000
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'slow_clock'
 Slack : -3.166
-TNS   : -1935.235
+TNS   : -1969.835
 
 Type  : Slow 1100mV 0C Model Minimum Pulse Width 'salucontrol_IDEX[0]'
-Slack : 0.115
+Slack : 0.118
 TNS   : 0.000
 
 Type  : Fast 1100mV 85C Model Setup 'salucontrol_IDEX[0]'
-Slack : -6.315
-TNS   : -177.640
+Slack : -8.162
+TNS   : -183.090
 
 Type  : Fast 1100mV 85C Model Setup 'slow_clock'
-Slack : -3.363
-TNS   : -2713.906
+Slack : -3.484
+TNS   : -2933.583
 
 Type  : Fast 1100mV 85C Model Hold 'slow_clock'
-Slack : -0.497
-TNS   : -0.497
+Slack : -1.041
+TNS   : -1.041
 
 Type  : Fast 1100mV 85C Model Hold 'salucontrol_IDEX[0]'
-Slack : 0.148
-TNS   : 0.000
+Slack : -0.060
+TNS   : -0.060
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'slow_clock'
 Slack : -2.174
-TNS   : -119.854
+TNS   : -120.743
 
 Type  : Fast 1100mV 85C Model Minimum Pulse Width 'salucontrol_IDEX[0]'
-Slack : 0.097
+Slack : 0.158
 TNS   : 0.000
 
 Type  : Fast 1100mV 0C Model Setup 'salucontrol_IDEX[0]'
-Slack : -5.671
-TNS   : -160.074
+Slack : -7.271
+TNS   : -165.743
 
 Type  : Fast 1100mV 0C Model Setup 'slow_clock'
-Slack : -2.913
-TNS   : -2311.734
+Slack : -2.964
+TNS   : -2433.320
 
 Type  : Fast 1100mV 0C Model Hold 'slow_clock'
-Slack : -0.545
-TNS   : -0.545
+Slack : -1.063
+TNS   : -1.063
 
 Type  : Fast 1100mV 0C Model Hold 'salucontrol_IDEX[0]'
-Slack : 0.110
-TNS   : 0.000
+Slack : -0.030
+TNS   : -0.030
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'slow_clock'
 Slack : -2.174
-TNS   : -146.254
+TNS   : -148.063
 
 Type  : Fast 1100mV 0C Model Minimum Pulse Width 'salucontrol_IDEX[0]'
-Slack : 0.179
+Slack : 0.221
 TNS   : 0.000
 
 ------------------------------------------------------------

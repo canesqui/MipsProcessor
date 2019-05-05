@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "05/03/2019 12:02:04"
+// Generated on "05/05/2019 19:37:04"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          mips_processor
 // 
@@ -33,24 +33,26 @@ module mips_processor_vlg_vec_tst();
 reg reset;
 reg slow_clock;
 // wires                                               
+wire [31:0] alu_in_a;
+wire [31:0] alu_in_b;
 wire [31:0] Instruction_out;
 wire [31:0] PC_out;
-wire [31:0] Read_data1_out;
-wire [31:0] Read_data2_out;
-wire [4:0] Read_reg1_out;
-wire [4:0] Read_reg2_out;
+wire [1:0] rd1_out_debug;
+wire [1:0] rd2_out_debug;
+wire reg_write_out;
 wire [31:0] Write_data_out;
 wire [4:0] Write_reg_out;
 
 // assign statements (if any)                          
 mips_processor i1 (
 // port map - connection between master ports and signals/registers   
+	.alu_in_a(alu_in_a),
+	.alu_in_b(alu_in_b),
 	.Instruction_out(Instruction_out),
 	.PC_out(PC_out),
-	.Read_data1_out(Read_data1_out),
-	.Read_data2_out(Read_data2_out),
-	.Read_reg1_out(Read_reg1_out),
-	.Read_reg2_out(Read_reg2_out),
+	.rd1_out_debug(rd1_out_debug),
+	.rd2_out_debug(rd2_out_debug),
+	.reg_write_out(reg_write_out),
 	.reset(reset),
 	.slow_clock(slow_clock),
 	.Write_data_out(Write_data_out),
@@ -58,7 +60,7 @@ mips_processor i1 (
 );
 initial 
 begin 
-#20000000 $finish;
+#100000000 $finish;
 end 
 
 // slow_clock
@@ -73,7 +75,7 @@ end
 initial
 begin
 	reset = 1'b0;
-	reset = #320000 1'b1;
+	reset = #1290000 1'b1;
 end 
 endmodule
 
