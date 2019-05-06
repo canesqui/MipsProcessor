@@ -18,7 +18,9 @@ ENTITY forwarding IS
 			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RT register from ID/EX
 			
 			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 out to alu
-			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	-- readdata2 out to alu
+			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			rd1_out, rd2_out        : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+			fWrite_reg_EXMEM_out, fWrite_reg_MEMWB_out, fRS_IDEX_out, fRT_IDEX_out : OUT STD_LOGIC_VECTOR(4 DOWNTO 0));	-- readdata2 out to alu			
 END forwarding;
 
 ARCHITECTURE behavior OF forwarding IS
@@ -31,9 +33,8 @@ BEGIN
 	
 PROCESS (fRegwrite_EXMEM, fRegwrite_MEMWB, fWrite_reg_EXMEM, fWrite_reg_MEMWB, fRS_IDEX, fRT_IDEX)
 BEGIN
-	--No hazard
-	rd1_mux <= "00";
-	rd2_mux <= "00";
+	
+	
 	--EX hazard
 	IF ((fRegwrite_EXMEM = '1') 
 			AND (fWrite_reg_EXMEM /= "00000") 
@@ -42,12 +43,17 @@ BEGIN
 	--MEM hazard
 	ELSIF (fRegwrite_MEMWB = '1' 
 			AND (fWrite_reg_MEMWB /= "00000") 
-			AND NOT ((fRegwrite_EXMEM = '1')
-			AND (fWrite_reg_EXMEM /= "00000") 
-			AND (fWrite_reg_EXMEM = fRS_IDEX)) 
+--			AND NOT ((fRegwrite_EXMEM = '1')
+--			AND (fWrite_reg_EXMEM /= "00000") 
+--			AND (fWrite_reg_EXMEM = fRS_IDEX)) 
 			AND (fWrite_reg_MEMWB = fRS_IDEX)) THEN	
 		rd1_mux <= "01";
+	ELSE
+		rd1_mux <= "00";
 	END IF;
+	
+	
+	
 	--EX hazard
 	IF ((fRegwrite_EXMEM = '1') 
 			AND (fWrite_reg_EXMEM /= "00000") 
@@ -56,11 +62,13 @@ BEGIN
 	--MEM hazard
 	ELSIF ((fRegwrite_MEMWB = '1')
 			AND (fWrite_reg_MEMWB /= "00000")
-			AND NOT ((fRegwrite_EXMEM = '1') 
-			AND (fWrite_reg_EXMEM /= "00000") 
-			AND (fWrite_reg_EXMEM = fRT_IDEX)) 
+--			AND NOT ((fRegwrite_EXMEM = '1') 
+--			AND (fWrite_reg_EXMEM /= "00000") 
+--			AND (fWrite_reg_EXMEM = fRT_IDEX)) 
 			AND (fWrite_reg_MEMWB = fRT_IDEX)) THEN
 		rd2_mux <= "01";
+	ELSE 
+		rd2_mux <= "00";
 	END IF;
 --	if (	MEM/WB.RegWrite 
 --			and (MEM/WB.RegisterRd ≠ 0)
@@ -97,6 +105,14 @@ END PROCESS;
 --if (MEM/WB.RegWrite and (MEM/WB.RegisterRd ≠ 0)
 -- and (MEM/WB.RegisterRd = ID/EX.RegisterRt))
 -- ForwardB = 01
+
+
+	rd1_out <= rd1_mux;
+	rd2_out <= rd2_mux;
+	fWrite_reg_EXMEM_out <= fWrite_reg_EXMEM;
+	fWrite_reg_MEMWB_out <= fWrite_reg_MEMWB;
+	fRS_IDEX_out <= fRS_IDEX;
+	fRT_IDEX_out <= fRT_IDEX;
 
 
 WITH (rd1_mux) SELECT
