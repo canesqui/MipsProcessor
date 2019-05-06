@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "05/05/2019 19:37:04"
+// Generated on "05/05/2019 23:20:59"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          mips_processor
 // 
@@ -33,10 +33,12 @@ module mips_processor_vlg_vec_tst();
 reg reset;
 reg slow_clock;
 // wires                                               
-wire [31:0] alu_in_a;
-wire [31:0] alu_in_b;
+wire [31:0] alu_result;
 wire [31:0] Instruction_out;
+wire mem_to_reg_control;
 wire [31:0] PC_out;
+wire [31:0] ram_in;
+wire [31:0] ram_out;
 wire [1:0] rd1_out_debug;
 wire [1:0] rd2_out_debug;
 wire reg_write_out;
@@ -46,10 +48,12 @@ wire [4:0] Write_reg_out;
 // assign statements (if any)                          
 mips_processor i1 (
 // port map - connection between master ports and signals/registers   
-	.alu_in_a(alu_in_a),
-	.alu_in_b(alu_in_b),
+	.alu_result(alu_result),
 	.Instruction_out(Instruction_out),
+	.mem_to_reg_control(mem_to_reg_control),
 	.PC_out(PC_out),
+	.ram_in(ram_in),
+	.ram_out(ram_out),
 	.rd1_out_debug(rd1_out_debug),
 	.rd2_out_debug(rd2_out_debug),
 	.reg_write_out(reg_write_out),

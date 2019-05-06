@@ -16,8 +16,11 @@ ENTITY mips_processor IS
 			Write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			reg_write_out				: OUT STD_LOGIC;
 			rd1_out_debug, rd2_out_debug : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-			alu_in_a				     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			alu_in_b					  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
+			ram_out				     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			ram_in					   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			alu_result                  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			mem_to_reg_control          : OUT STD_LOGIC);
+			--alu_in_b					  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
 END mips_processor;
 
 ARCHITECTURE behavior OF mips_processor IS
@@ -147,7 +150,7 @@ COMPONENT forwarding IS
 			--rd1_out,rd2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
 			rd1_out_debug, rd2_out_debug : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);	
 			write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			alu_result_out 			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	
+			alu_result_out 			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));			
 END COMPONENT;
 
 
@@ -185,7 +188,11 @@ PROCESS (write_data_input,mux_write_register, sregwrite_MEMWB)
 BEGIN
 	reg_write_out <= sregwrite_MEMWB;
 	write_reg_out  <= swriteregister_EXMEM;--mux_write_register;
-	Write_data_out <= write_data_input;		
+	Write_data_out <= write_data_input;	
+   ram_out <= mux_memory_input1;	
+	ram_in <= sreaddata2_EXMEM;
+	alu_result <= alu_memory_result;
+	mem_to_reg_control <= smemtoreg_MEMWB;
 END PROCESS;
 		
 		
@@ -464,7 +471,7 @@ alu_branch : alu PORT MAP ( inputA => pc_counter_input, inputB => alu_branch_inp
 								  
 								  
 mem : RAM PORT MAP ( clock => NOT slow_clock, address => salumainresult_EXMEM(7 DOWNTO 2), 
-							data => read_data2_reg, rden => smemread_EXMEM, 
+							data => sreaddata2_EXMEM, rden => smemread_EXMEM, 
 							wren => smemwrite_EXMEM, q => mux_memory_input1   
 						  );	
 								  								  

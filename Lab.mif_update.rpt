@@ -1,5 +1,5 @@
 MIF/HEX Update report for Lab
-Thu May 02 09:08:28 2019
+Sun May 05 23:14:55 2019
 Quartus Prime Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
 
 
@@ -33,22 +33,24 @@ agreement for further details.
 
 
 
-+-----------------------------------------------------------+
-; MIF/HEX Update Summary                                    ;
-+-----------------------+-----------------------------------+
-; MIF/HEX Update Status ; Failed - Thu May 02 09:08:28 2019 ;
-; Revision Name         ; Lab                               ;
-; Top-level Entity Name ; mips_processor                    ;
-; Family                ; Cyclone V                         ;
-; Device                ; 5CGXFC7C7F23C8                    ;
-+-----------------------+-----------------------------------+
++---------------------------------------------------------------+
+; MIF/HEX Update Summary                                        ;
++-----------------------+---------------------------------------+
+; MIF/HEX Update Status ; Successful - Sun May 05 23:14:55 2019 ;
+; Revision Name         ; Lab                                   ;
+; Top-level Entity Name ; mips_processor                        ;
+; Family                ; Cyclone V                             ;
+; Device                ; 5CGXFC7C7F23C8                        ;
++-----------------------+---------------------------------------+
 
 
-+--------------------------------+
-; MIF/HEX Update Processed Files ;
-+--------------------------------+
-; File Name                      ;
-+--------------------------------+
++---------------------------------------------------------------+
+; MIF/HEX Update Processed Files                                ;
++---------------------------------------------------------------+
+; File Name                                                     ;
++---------------------------------------------------------------+
+; C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROM.mif ;
++---------------------------------------------------------------+
 
 
 +-------------------------+
@@ -57,13 +59,15 @@ agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime MIF/HEX Update
     Info: Version 15.1.0 Build 185 10/21/2015 SJ Lite Edition
-    Info: Processing started: Thu May 02 09:08:26 2019
+    Info: Processing started: Sun May 05 23:14:47 2019
 Info: Command: quartus_cdb Lab -c Lab --update_mif
-Error (39022): Found no valid Memory Initialization File to process
-Error: Quartus Prime MIF/HEX Update was unsuccessful. 1 error, 0 warnings
-    Error: Peak virtual memory: 5088 megabytes
-    Error: Processing ended: Thu May 02 09:08:28 2019
-    Error: Elapsed time: 00:00:02
-    Error: Total CPU time (on all processors): 00:00:02
+Critical Warning (127005): Memory depth (64) in the design file differs from memory depth (9) in the Memory Initialization File "C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROM.mif" -- setting initial value for remaining addresses to 0
+Info (39024): Processed the following Memory Initialization File(s)
+    Info (39025): Processed Memory Initialization File C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROM.mif File: C:/Users/ronaldocanesqui/Desktop/MipsProcessor-master/ROM.mif Line: 0
+Info: Quartus Prime MIF/HEX Update was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 5110 megabytes
+    Info: Processing ended: Sun May 05 23:14:55 2019
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:08
 
 

@@ -53,7 +53,7 @@ BEGIN
 			--sw		
 			WHEN "101011" => MemWrite <= '1'; ALUSrc <= '1'; ALUControl <= "0010";
 			--lw		
-			WHEN "100011" => MemRead <= '1'; ALUSrc <= '1'; RegWrite <= '1'; ALUControl <= "0010";
+			WHEN "100011" => MemRead <= '1'; MemtoReg <= '1'; RegWrite <= '1'; ALUSrc <= '1'; ALUControl <= "0010";
 			
 			WHEN others =>				
 							
