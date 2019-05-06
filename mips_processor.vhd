@@ -14,19 +14,19 @@ ENTITY mips_processor IS
 			--Read_data1_out				: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			--Read_data2_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
 			Write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			reg_write_out				: OUT STD_LOGIC;
-			rd1_out_debug, rd2_out_debug : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
-			ram_out				     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			ram_in					   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			alu_result                  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			mem_to_reg_control          : OUT STD_LOGIC);
+			reg_write_out				: OUT STD_LOGIC);
+			--rd1_out_debug, rd2_out_debug : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);
+			--ram_out				     : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			--ram_in					   : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			--alu_result                  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			--mem_to_reg_control          : OUT STD_LOGIC);
 			--alu_in_b					  : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
 END mips_processor;
 
 ARCHITECTURE behavior OF mips_processor IS
 
-SIGNAL pc_counter, pc_counter_input, spc_IFID, spc_IDEX, spc_EXMEM, spc_MEMWB, instruction, sinstruction_IFID, alu_mux_input1, ssignextend_IDEX : STD_LOGIC_VECTOR (31 DOWNTO 0);
-SIGNAL read_data1_reg, sreaddata1_IDEX, sreaddata1_EXMEM, alu_input_a, alu_input_b, read_data2_reg, sreaddata2_IDEX, sreaddata2_EXMEM, alu_oper1, alu_oper2 : STD_LOGIC_VECTOR (31 DOWNTO 0); 
+SIGNAL pc_counter, pc_counter_input, spc_IFID, spc_IDEX, spc_EXMEM, spc_MEMWB, instruction, sinstruction_IFID, sinstruction_IDEX, sinstruction_EXMEM, sinstruction_MEMWB, alu_mux_input1, ssignextend_IDEX : STD_LOGIC_VECTOR (31 DOWNTO 0);
+SIGNAL read_data1_reg, sreaddata1_IDEX, sreaddata1_EXMEM, alu_input_intermed_a, alu_input_intermed_b, alu_input_a, alu_input_b, read_data2_reg, sreaddata2_IDEX, sreaddata2_EXMEM, alu_oper1, alu_oper2 : STD_LOGIC_VECTOR (31 DOWNTO 0); 
 SIGNAL temp_calc, mux_branch_input1, mux_jump_input0, mux_pc_input, alu_branch_input1 : STD_LOGIC_VECTOR (31 DOWNTO 0); 
 SIGNAL alu_result_internal, salumainresult_EXMEM, salumainresult_MEMWB, alu_memory_result, mux_memory_input1, smemreaddata_MEMWB, write_data_input : STD_LOGIC_VECTOR (31 DOWNTO 0);
 SIGNAL jump_address, sjumpaddress_IDEX, sjumpaddress_EXMEM, mux_jump_output : STD_LOGIC_VECTOR (31 DOWNTO 0);
@@ -146,12 +146,38 @@ COMPONENT forwarding IS
 			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RT register from ID/EX
 			
 			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 out to alu
-			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata2 out to alu 
+			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	-- readdata2 out to alu 
 			--rd1_out,rd2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));
-			rd1_out_debug, rd2_out_debug : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);	
-			write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
-			alu_result_out 			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));			
+			--rd1_out_debug, rd2_out_debug : OUT STD_LOGIC_VECTOR(1 DOWNTO 0);	
+			--write_data_out          : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
+			--alu_result_out 			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0));			
 END COMPONENT;
+
+
+
+----fRegwrite_EXMEM			: IN STD_LOGIC;	-- reg write signal from EX/Mem
+----			fRegwrite_MEMWB         : IN STD_LOGIC;	-- reg write signal from Ex/Mem
+--			
+----			fRead_data1_in				: IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 in from register file
+----			fRead_data2_in          : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata2 in from register file
+--			fALU_result_EXMEM		   : IN STD_LOGIC_VECTOR(31 DOWNTO 0);	-- EX/Mem ALU result
+--			freg_writedata_MEMWB		: IN STD_LOGIC_VECTOR(31 DOWNTO 0); -- Mem/WB write register data 
+--			
+--			fWrite_reg_EXMEM			: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- write register from Ex/Mem 			
+--			fWrite_reg_MEMWB			: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- write register from Mem/WB			
+--			fRS_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RS register from ID/EX
+--			fRT_IDEX						: IN STD_LOGIC_VECTOR(4 DOWNTO 0);	-- RT register from ID/EX
+--			
+--			fRead_data1_out			: OUT STD_LOGIC_VECTOR(31 DOWNTO 0);	-- readdata1 out to alu
+--			fRead_data2_out         : OUT STD_LOGIC_VECTOR(31 DOWNTO 0));	-- readdata2 out to alu
+
+
+
+
+
+
+
+
 
 
 BEGIN
@@ -164,35 +190,37 @@ BEGIN
 PROCESS (pc_counter)
 BEGIN	
 	pc_counter_input <= pc_counter + 4;
-	PC_out <= pc_counter_input;
+	
 END PROCESS;
+
+PC_out <= pc_counter_input;
 
 PROCESS (sinstruction_IFID)
 BEGIN
 	--ronaldo
 	jump_address <= pc_counter_input(31 DOWNTO 28) & (sinstruction_IFID(25 DOWNTO 0)&"00");	
-	instruction_out <= sinstruction_IFID;
+	instruction_out <= sinstruction_MEMWB;
 	--read_reg1_out <= sinstruction_IFID(25 DOWNTO 21);
 	--read_reg2_out <= sinstruction_IFID(20 DOWNTO 16);	
 END PROCESS;
 
-PROCESS (regdestmux, read_data1_reg, read_data2_reg)
-BEGIN
+--PROCESS (regdestmux, read_data1_reg, read_data2_reg)
+--BEGIN
 	--Read_data1_out <= read_data1_reg;
 	--Read_data2_out <= read_data2_reg;
 	
 	
-END PROCESS;
+--END PROCESS;
 		
 PROCESS (write_data_input,mux_write_register, sregwrite_MEMWB)
 BEGIN
 	reg_write_out <= sregwrite_MEMWB;
 	write_reg_out  <= swriteregister_EXMEM;--mux_write_register;
 	Write_data_out <= write_data_input;	
-   ram_out <= mux_memory_input1;	
-	ram_in <= sreaddata2_EXMEM;
-	alu_result <= alu_memory_result;
-	mem_to_reg_control <= smemtoreg_MEMWB;
+   --ram_out <= mux_memory_input1;	
+	--ram_in <= sreaddata2_EXMEM;
+	--alu_result <= alu_memory_result;
+	--mem_to_reg_control <= smemtoreg_MEMWB;
 END PROCESS;
 		
 		
@@ -248,6 +276,8 @@ BEGIN
 			sreadreg1_IDEX <= "00000";
 			sreadreg2_IDEX <= "00000";
 			swriteregister_IDEX <= "00000";
+			sregdestmux_IDEX <= "00000";
+			sinstruction_IDEX <= X"00000000";
 		ELSE
 			spc_IDEX <= spc_IFID;	
 			--MIPS_CONTROL
@@ -276,6 +306,7 @@ BEGIN
 			sreadreg2_IDEX <= sinstruction_IFID(20 DOWNTO 16);
 			swriteregister_IDEX <= mux_write_register;					
 			sregdestmux_IDEX <= regdestmux;
+			sinstruction_IDEX <= sinstruction_IFID;
 		END IF;
 	END IF;
 
@@ -309,6 +340,8 @@ BEGIN
 			sreadreg1_EXMEM <= "00000";
 			sreadreg2_EXMEM <= "00000";
 			swriteregister_EXMEM <= "00000";
+			sregdestmux_EXMEM <= "00000";
+			sinstruction_EXMEM <= X"00000000";
 		ELSE
 			spc_EXMEM <= spc_IDEX;		
 			--MIPS_CONTROL
@@ -336,6 +369,7 @@ BEGIN
 			sreadreg2_EXMEM <= sreadreg2_IDEX;
 			swriteregister_EXMEM <= swriteregister_IDEX;
 			sregdestmux_EXMEM <= sregdestmux_IDEX;
+			sinstruction_EXMEM <= sinstruction_IDEX;
 			--mux_one <= sjumpaddress_EXMEM;					
 
 		END IF;
@@ -359,6 +393,8 @@ BEGIN
 			sreadreg1_MEMWB <= "00000";
 			sreadreg2_MEMWB <= "00000";
 			swriteregister_MEMWB <= "00000";
+			sregdestmux_MEMWB <= "00000";
+			sinstruction_MEMWB <= x"00000000";
 		ELSE
 			spc_MEMWB <= spc_EXMEM;	
 			--MIPS_CONTROL
@@ -376,7 +412,7 @@ BEGIN
 			--
 			swriteregister_MEMWB <= swriteregister_EXMEM;	
 			sregdestmux_MEMWB <= sregdestmux_EXMEM;			
-			
+			sinstruction_MEMWB <= sinstruction_EXMEM;
 		END IF;
 	END IF;
 	
@@ -394,7 +430,7 @@ END PROCESS;
 
 pc_mips: PC PORT MAP  (
 								clock => slow_clock, reset => local_reset, pc_output => pc_counter, 
-								pc_input => mux_pc_input--mux_jump_output
+								pc_input => pc_counter_input--mux_pc_input--mux_jump_output
 					  );
 
 --Mapped output to if/id stage
@@ -490,6 +526,7 @@ branch : orgate PORT MAP ( inputA => branch_bne_input, inputB => branch_beq_inpu
 --	alu_in_a <= alu_input_a;
 	--alu_in_b <= alu_input_b;
 --END PROCESS;
+
 							  
 forward : forwarding PORT MAP ( 
 										  fRegwrite_EXMEM => sregwrite_EXMEM, 
@@ -503,9 +540,9 @@ forward : forwarding PORT MAP (
 										  fRS_IDEX => sreadreg1_IDEX, 
 										  fRT_IDEX => sreadreg2_IDEX,
 										  fRead_data1_out => alu_input_a, 
-										  fRead_data2_out => alu_input_b,
-										  rd1_out_debug => rd1_out_debug,
-										  rd2_out_debug => rd2_out_debug--,
+										  fRead_data2_out => alu_input_b--,
+										  --rd1_out_debug => rd1_out_debug,
+										  --rd2_out_debug => rd2_out_debug--,
 										  --write_data_out => alu_input_a,
 										  --alu_result_out => alu_input_b
 										);							 
