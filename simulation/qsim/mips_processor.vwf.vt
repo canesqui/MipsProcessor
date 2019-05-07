@@ -19,7 +19,7 @@
 // the top level entity of the current Quartus project .The user can use this   
 // testbench to simulate his design using a third-party simulation tool .       
 // *****************************************************************************
-// Generated on "05/06/2019 19:16:04"
+// Generated on "05/06/2019 23:25:25"
                                                                                 
 // Verilog Test Bench (with test vectors) for design :                          mips_processor
 // 
@@ -37,6 +37,7 @@ wire [31:0] alu_oper2_out;
 wire [4:0] input0_out;
 wire [4:0] input1_out;
 wire [31:0] Instruction_out;
+wire jal_out;
 wire [4:0] out_fRS_IDEX;
 wire [4:0] out_fRT_IDEX;
 wire [4:0] out_fWrite_reg_EXMEM;
@@ -46,6 +47,7 @@ wire [1:0] rd1_out_debug;
 wire [1:0] rd2_out_debug;
 wire reg_write_out;
 wire reset_stages_out;
+wire [31:0] ronaldo_mux_pc;
 wire sregdest_MEMWB_out;
 wire [31:0] Write_data_out;
 wire [4:0] write_reg_out;
@@ -57,6 +59,7 @@ mips_processor i1 (
 	.input0_out(input0_out),
 	.input1_out(input1_out),
 	.Instruction_out(Instruction_out),
+	.jal_out(jal_out),
 	.out_fRS_IDEX(out_fRS_IDEX),
 	.out_fRT_IDEX(out_fRT_IDEX),
 	.out_fWrite_reg_EXMEM(out_fWrite_reg_EXMEM),
@@ -67,6 +70,7 @@ mips_processor i1 (
 	.reg_write_out(reg_write_out),
 	.reset(reset),
 	.reset_stages_out(reset_stages_out),
+	.ronaldo_mux_pc(ronaldo_mux_pc),
 	.slow_clock(slow_clock),
 	.sregdest_MEMWB_out(sregdest_MEMWB_out),
 	.Write_data_out(Write_data_out),
